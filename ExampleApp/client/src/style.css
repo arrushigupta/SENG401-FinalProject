@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind componewnts;
+@tailwind utilities;
+
+body{
+  @apply bg-white;
+  
+}
+p{
+  @apply text-white;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  width: 250px;
+}
+
+.nav-items {
+  list-style: none;
+  display: flex;
+}
+
+.nav-items > li {
+  padding: 10px;
+}
+
+.nav-title {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.05em;
+}
