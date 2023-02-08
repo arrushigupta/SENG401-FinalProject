@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "react-router-dom": "^6.4.3"
+  },
+  "name": "cpsc471-project",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ideen1/cpsc471-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ideen1/cpsc471-project/issues"
+  },
+  "homepage": "https://github.com/ideen1/cpsc471-project#readme"
+}
