@@ -1,9 +1,7 @@
 const express = require('express');
 const Model = require('../models/model');
-
 const router = express.Router()
 module.exports = router;
-
 
 // basic test methods
 
@@ -28,6 +26,7 @@ router.delete('/delete/:id', (req, res) => {
 })
 
 router.post('/post', async (req, res) => {
+    console.log(req.body);
     const data = new Model({
         name: req.body.name,
         age: req.body.age
