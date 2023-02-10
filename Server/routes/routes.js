@@ -1,5 +1,7 @@
 const express = require('express');
-const Model = require('../models/example_model');
+const ExampleModel = require('../models/example_model');
+const UserModel = require('../models/user_model');
+const bcrypt = require("bcrypt")
 const router = express.Router()
 module.exports = router;
 
@@ -25,18 +27,22 @@ router.delete('/delete/:id', (req, res) => {
     res.send('Delete by ID API')
 })
 
-router.post('/post', async (req, res) => {
+router.post('/register', async (req, res) => {
     console.log(req.body);
-    const data = new Model({
-        name: req.body.name,
-        age: req.body.age
-    })
-
-    try {
-        const dataToSave = await data.save();
-        res.status(200).json(dataToSave)
-    }
-    catch (error) {
-        res.status(400).json({ message: error.message })
-    }
+    // need to check if user with same email or username exists in the database
+    
+    bcrypt.hash(req.body.password, 10, async function (err, hash) {
+        const data = new UserModel({
+            username: req.body.username,
+            email: req.body.email,
+            password: hash,
+        })
+        try {
+            const dataToSave = await data.save();
+            res.status(200).json(dataToSave)
+        }
+        catch (error) {
+            res.status(400).json({ message: error.message })
+        }
+    });
 })
