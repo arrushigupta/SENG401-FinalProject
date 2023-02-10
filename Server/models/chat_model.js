@@ -1,23 +1,16 @@
-import {userSchema}from './user_model.js';
 const mongoose = require('mongoose');
 
 
 const chatSchema = new mongoose.Schema(
-    {from : {
-        type: userSchema, 
-        required: true
-    }, 
-    to : {
-        type: userSchema, 
-        required: true
-    }, 
-    date: {
-        required: true, 
-        type: Date, 
-        default: Date.now
-    }, 
-    messages: [],
-    
-});
+    {
+        members: [Number, Number], // we can either use Numbers or Strings for the user ID
+        messages: [
+          {
+             sender: Number, 
+             message: String, 
+             timestamp: Date
+          }],
+       total_messages: Number
+    });
 
 module.exports = mongoose.model('Chat', chatSchema)
