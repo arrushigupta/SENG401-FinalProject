@@ -3,6 +3,13 @@ import { loginFields } from "../../constants/formField";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
+import {
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+  } from "firebase/auth";
+import { auth } from '../../firebase'
+
 
 const fields=loginFields;
 let fieldsState = {};
@@ -22,9 +29,20 @@ export default function Login(){
     }
 
     //Handle Login API Integration here
-    const authenticateUser = () =>{
-
+    const authenticateUser = async () =>{
+        try {
+            const user = await signInWithEmailAndPassword(
+              auth,
+              loginState.email,
+              loginState.password
+            );
+            console.log(user);
+          } catch (error) {
+            console.log(error.message);
+          }
     }
+
+    
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

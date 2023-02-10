@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { signupFields } from "../../constants/formField";
 import FormAction from "./FormAction";
 import Input from "./Input";
+import { auth } from '../../firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const fields = signupFields;
 let fieldsState = {};
@@ -11,8 +13,8 @@ fields.forEach(field => fieldsState[field.id] = '');
 export default function SignUp() {
   const [signupState, setSignupState] = useState(fieldsState);
 
-  const handleChange = (e) => { 
-    setSignupState({ ...signupState, [e.target.id]: e.target.value }); 
+  const handleChange = (e) => {
+    setSignupState({ ...signupState, [e.target.id]: e.target.value });
     console.log(signupState)
   }
 
@@ -23,8 +25,15 @@ export default function SignUp() {
   }
 
   //handle Signup API Integration here
-  const createAccount = () => {
-
+  const createAccount = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(auth, signupState.email, signupState.password)
+      console.log(user)
+      console.log(auth.currentUser)
+    } catch (error) {
+      console.log(error.message)
+    }
+    setSignupState('')
   }
 
   return (
