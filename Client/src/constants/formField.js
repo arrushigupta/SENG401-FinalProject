@@ -55,10 +55,10 @@ const signupFields=[
     {
         labelText:"Confirm Password",
         labelFor:"confirm-password",
-        id:"confirm-password",
-        name:"confirm-password",
+        id:"confirm_password",
+        name:"confirm_password",
         type:"password",
-        autoComplete:"confirm-password",
+        autoComplete:"confirm_password",
         isRequired:true,
         placeholder:"Confirm Password"   
     }
