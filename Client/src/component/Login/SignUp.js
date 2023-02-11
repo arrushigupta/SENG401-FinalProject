@@ -34,23 +34,38 @@ export default function SignUp() {
     createAccount()
   }
 
-  const notify = () => {
-    toast('User Registered', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  const notify = (label) => {
+    if (label === "success") {
+      toast.success('User Registered', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    if (label === "error") {
+      toast.error("Password doesn't match with Confirm Password", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   //handle Signup API Integration here
   const createAccount = async () => {
     if (signupState.password !== signupState.confirm_password) {
-      window.alert("Password doesn't match with Confirm Password");
+      notify("error")
+      // window.alert("Password doesn't match with Confirm Password");
       setLoading(false);
       return;
     }
@@ -63,7 +78,7 @@ export default function SignUp() {
           setUserID(signupState.username);
           setSignupState('')
 
-          notify()
+          notify("success")
           setTimeout(() => {
             console.log("Delayed for 3 second.");
             navigate("/")
@@ -109,9 +124,6 @@ export default function SignUp() {
         }
         <FormAction handleSubmit={handleSubmit} text="Signup" />
       </div>
-
-
-
     </form>
   )
 }
