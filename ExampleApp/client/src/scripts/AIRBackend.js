@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react"
 
-
-
 export function AIRGet(url, setLoading, setData) {
     setLoading(true);
     const requestOptions = {

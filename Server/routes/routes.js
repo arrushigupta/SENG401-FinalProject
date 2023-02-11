@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
         })
         try {
             const dataToSave = await data.save();
-            res.status(200).json(dataToSave)
+            res.status(200).json(dataToSave, {message: "Success!"})
         }
         catch (error) {
             res.status(400).json({ message: error.message })
