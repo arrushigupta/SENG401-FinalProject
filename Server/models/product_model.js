@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 
 // I think User should have posts, and those posts can be null but like it should be in the schema
 const productSchema = new mongoose.Schema(
-    {name : {
+    {
+    userID:{
+        type : String,  // or Number
+        required: true
+    }, 
+    name : {
         type: String, 
         required: true
     }, 
