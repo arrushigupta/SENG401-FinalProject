@@ -52,6 +52,7 @@ router.post("/login", (req, res) => {
             if(!passwordCheck) {
               return res.status(400).send({
                 message: "Passwords does not match",
+                status:"error",
                 error,
               });
             }
@@ -70,6 +71,7 @@ router.post("/login", (req, res) => {
             res.status(200).send({
               message: "Login Successful",
               email: user.email,
+              status:"success",
               token,
             });
           })
@@ -77,6 +79,7 @@ router.post("/login", (req, res) => {
           .catch((error) => {
             res.status(400).send({
               message: "Passwords does not match",
+              status:"error",
               error,
             });
           });
@@ -85,6 +88,7 @@ router.post("/login", (req, res) => {
       .catch((e) => {
         res.status(404).send({
           message: "Email not found",
+          status:"error",
           e,
         });
       });
@@ -100,13 +104,15 @@ router.post('/register', async (req, res) => {
             username: req.body.username,
             email: req.body.email,
             password: hash,
+            
         })
         try {
             const dataToSave = await data.save();
-            res.status(200).json(dataToSave)
+            res.status(200).json({...dataToSave, status:"success"})
         }
         catch (error) {
-            res.status(400).json({ message: error.message })
+                
+                res.status(400).json({ message: error.message, status:"error" })
         }
     });
 })
