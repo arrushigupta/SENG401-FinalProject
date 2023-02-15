@@ -9,10 +9,7 @@ export default function Header({
     return(
         <div className="mb-10">
             <div className="flex justify-center">
-                <img width="400px" height="400px" 
-                    alt=""
-                    className="h-14 w-14"
-                    src={img}/>
+                <img class="scale-50" src={img}/>
             </div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                 {heading}
