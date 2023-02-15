@@ -15,6 +15,17 @@ const userSchema = new mongoose.Schema({
     username: {
         required: true,
         type: String
+    }, 
+    fName:{ // first name
+        type: String, 
+        required: true
+    }, 
+    lName:{ // last name
+        type: String, 
+        required: true
+    }, 
+    phoneNumber:{
+        type:Number
     }
 })
 

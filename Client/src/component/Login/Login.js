@@ -3,10 +3,9 @@ import { loginFields } from "../../constants/formField";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
-import UserContext from "../context/UserContext";
-import LoadingContext from "../context/LoadingContext";
-import { useNavigate } from "react-router-dom";
-import { DINOSGet } from '../../scripts/backend-functions'
+import UserContext from "../../context/UserContext";
+import LoadingContext from "../../context/LoadingContext";
+import { DINOSPost } from '../../scripts/backend-functions'
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,26 +33,54 @@ export default function Login() {
         authenticateUser();
     }
 
+    const notify = (label) => {
+        if (label === "success") {
+            toast.success('User Login Succeeded', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        if (label === "error") {
+            toast.error("Password doesn't match", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    };
     //Handle Login API Integration here
     const authenticateUser = async () => {
         try {
-            DINOSGet("http://localhost:4000/api/getOne/:id", setLoading, { username: signupState.username, email: signupState.email, password: signupState.password }, "/").then(
-                // (response) => {
-                //     if (response.length == 1) {
-                //         console.log(response[0]);
-                //         localStorage.setItem("session", JSON.stringify({ userID: response[0].Email, userType: response[0].UserType }));
-                //         setUserID(response[0].Email);
-                //         setUserType(response[0].UserType);
-                //         // console.log("Cheese: " + userID);
-                //         navigate("/")
-                //     } else {
-                //         setInvalid(true);
-                //         console.log("User not found");
-                //     }
-                // }
-            );
+            DINOSPost('http://localhost:4000/api/login', setLoading, { email: loginState.email, password: loginState.password }).then(
+                (response) => {
+                    console.log(response);
+
+
+                    setUserName(loginState.username);
+                    setLoginState('')
+
+                    notify("success")
+                    setTimeout(() => {
+                        console.log("Delayed for 3 second.");
+                        //   navigate("/")
+                    }, "3000")
+
+                }
+            )
         } catch (error) {
-            console.log(error.message);
+            notify('error')
+            console.log(error.message)
         }
     }
 
@@ -61,6 +88,16 @@ export default function Login() {
 
     return (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <ToastContainer position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light" />
             <div className="-space-y-px">
                 {
                     fields.map(field =>
