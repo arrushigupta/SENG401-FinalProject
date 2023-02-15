@@ -66,15 +66,20 @@ export default function Login() {
                 (response) => {
                     console.log(response);
 
+                    if (response.status === "success") {
 
-                    setUserName(loginState.username);
-                    setLoginState('')
+                        setUserName(loginState.username);
+                        setLoginState('')
 
-                    notify("success")
-                    setTimeout(() => {
-                        console.log("Delayed for 3 second.");
-                        //   navigate("/")
-                    }, "3000")
+                        notify("success")
+                        setTimeout(() => {
+                            console.log("Delayed for 3 second.");
+                            //   navigate("/")
+                        }, "3000")
+                    } else {
+                        notify("error")
+
+                    }
 
                 }
             )

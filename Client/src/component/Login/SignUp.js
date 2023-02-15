@@ -74,15 +74,19 @@ export default function SignUp() {
         (response) => {
           console.log(response);
 
+          if (response.status === "success") {
+            setUserID(signupState.username);
+            setSignupState('')
 
-          setUserID(signupState.username);
-          setSignupState('')
+            notify("success")
+            setTimeout(() => {
+              console.log("Delayed for 3 second.");
+              navigate("/")
+            }, "3000")
+          } else {
+            notify("error")
 
-          notify("success")
-          setTimeout(() => {
-            console.log("Delayed for 3 second.");
-            navigate("/")
-          }, "3000")
+          }
 
         }
       )

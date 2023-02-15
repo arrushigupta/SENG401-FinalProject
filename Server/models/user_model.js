@@ -16,17 +16,17 @@ const userSchema = new mongoose.Schema({
         required: true,
         type: String
     }, 
-    fName:{ // first name
-        type: String, 
-        required: true
-    }, 
-    lName:{ // last name
-        type: String, 
-        required: true
-    }, 
-    phoneNumber:{
-        type:Number
-    }
+    // fName:{ // first name
+    //     type: String, 
+    //     required: true
+    // }, 
+    // lName:{ // last name
+    //     type: String, 
+    //     required: true
+    // }, 
+    // phoneNumber:{
+    //     type:Number
+    // }
 })
 
 module.exports = mongoose.model('User', userSchema)
