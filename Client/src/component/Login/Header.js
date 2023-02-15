@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import img from '../../img/dinos.png'
+import img from '../../img/dinosM.png'
 export default function Header({
     heading,
     paragraph,
