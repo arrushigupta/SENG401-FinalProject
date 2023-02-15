@@ -35,58 +35,69 @@ export default function Login() {
 
     const notify = (label) => {
         if (label === "success") {
-          toast.success('User Login Succeeded', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+            toast.success('User Login Succeeded', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
         if (label === "error") {
-          toast.error("Password doesn't match", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+            toast.error("Password doesn't match", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
-      };
+    };
     //Handle Login API Integration here
     const authenticateUser = async () => {
         try {
-            DINOSPost('http://localhost:4000/api/login', setLoading, {email: loginState.email, password: loginState.password }).then(
-              (response) => {
-                console.log(response);
-      
-      
-                setUserName(loginState.username);
-                setLoginState('')
-      
-                notify("success")
-                setTimeout(() => {
-                  console.log("Delayed for 3 second.");
-                  navigate("/")
-                }, "3000")
-      
-              }
+            DINOSPost('http://localhost:4000/api/login', setLoading, { email: loginState.email, password: loginState.password }).then(
+                (response) => {
+                    console.log(response);
+
+
+                    setUserName(loginState.username);
+                    setLoginState('')
+
+                    notify("success")
+                    setTimeout(() => {
+                        console.log("Delayed for 3 second.");
+                        //   navigate("/")
+                    }, "3000")
+
+                }
             )
-          } catch (error) {
+        } catch (error) {
+            notify('error')
             console.log(error.message)
-          }
+        }
     }
 
 
 
     return (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <ToastContainer position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light" />
             <div className="-space-y-px">
                 {
                     fields.map(field =>
