@@ -17,6 +17,15 @@ const productSchema = new mongoose.Schema(
         type: Date, 
         default: Date.now
     }, 
-    price: Number,
+    price: Number, 
+
+    category: {
+        type: String, 
+        required: true
+    }, 
+
+    description: {
+        type: String
+    }
     
     });
