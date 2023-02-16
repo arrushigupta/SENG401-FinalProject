@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from "react"
 import SignupPage from './pages/SignUp';
 import LoginPage from './pages/Login';
+import HomePage from './pages/Home';
 import {
   BrowserRouter,
   Routes,
@@ -9,6 +10,9 @@ import {
 } from "react-router-dom";
 import LoadingContext from "./context/LoadingContext";
 import UserContext from "./context/UserContext";
+import ProtectedRoute from './component/ProtectedRoute';
+import SettingsPage from './pages/Settings';
+import UserPage from './pages/User';
 
 
 function App() {
@@ -27,8 +31,11 @@ function App() {
                 <Routes>
                   <Route path="/" element={<LoginPage />} />
                   <Route path="/signup" element={<SignupPage />} />
+                  <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+                  <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+                  <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+                  <Route path="/user" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
                 </Routes>
-
               </BrowserRouter>
             </UserContext.Provider>
           </LoadingContext.Provider>
