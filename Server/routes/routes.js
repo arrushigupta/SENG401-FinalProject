@@ -112,7 +112,7 @@ router.post('/register', async (req, res) => {
         }
         catch (error) {
                 
-                res.status(400).json({ message: error.message, status:"error" })
+            res.status(400).json({ message: error.message, status:"error" })
         }
     });
 })
