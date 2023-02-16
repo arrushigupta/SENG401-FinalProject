@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema({
         required: true,
         type: String
     }, 
+    isAvatarImageSet: {
+        type: Boolean,
+        default: false,
+      },
+      avatarImage: {
+        type: String,
+        default: "",
+      }
     // fName:{ // first name
     //     type: String, 
     //     required: true

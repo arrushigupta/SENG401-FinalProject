@@ -1,63 +1,65 @@
-import axios from 'axios';
-import React, {useState,useEffect, useRef}from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Contacts from './Contacts';
-import ChatContainer from './ChatContainer';
-import {io}  from 'socket.io-client';
+import Chat from './Chat';
+import { io } from 'socket.io-client';
+import { DINOSPost } from '../../scripts/backend-functions'
+
 
 function ChatRoom() {
-  const socket = useRef();
-  const navigate = useNavigate();
-  const [currentUser,setCurrentUser] = useState(undefined);
-  const [contacts,setContacts]= useState([]);
-  const [currentChat,setCurrentChat] = useState(undefined);
-  useEffect(() => {
-    async function fetchData() {
-      if (!localStorage.getItem("userId")){
-      navigate("/");}
-      else{
-        setCurrentUser(await JSON.parse(localStorage.getItem("userId")));
-      }
-    }
-    fetchData();
-  }, []);
-  useEffect(() => {
-    async function fetchData() {
-      if (currentUser) {
-            DINOSPost('http://localhost:4000/api/getMessage', setLoading, { user: loginState.email, password: loginState.password }).then(
-          
-          setContacts(data.data);
-        }else {
-          navigate('/setAvatar');
-        
-      }
-    }
-    fetchData();
-  }, [currentUser]);
-  const handleChatChange = (chat) =>{
-    setCurrentChat(chat)
-  }
-useEffect(()=>{
-  if(currentUser){
-    socket.current = io(host);
-    socket.current.emit("add-user",currentUser._id);
-  } 
-},[currentUser])
+    const socket = useRef();
+    const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState(undefined);
+    const [contacts, setContacts] = useState([]);
+    const [currentChat, setCurrentChat] = useState(undefined);
+    useEffect(() => {
+        async function fetchData() {
+            if (!localStorage.getItem("userId")) {
+                navigate("/");
+            }
+            else {
+                setCurrentUser(await JSON.parse(localStorage.getItem("userId")));
+            }
+        }
+        fetchData();
+    }, []);
+    useEffect(() => {
+        async function fetchData() {
+            if (currentUser) {
+                DINOSPost('http://localhost:4000/api/getMessage', setLoading, { id: currentUser._id }).then(
+                    (response) => {
+                        console.log(response);
+                        setContacts(response.data);
+                    }
+                )
+            } else {
+                navigate('/');
 
-  return (<>
-    <Container>
-<div className='container'>
-  <Contacts contacts={contacts} currentUser={currentUser}  changeChat={handleChatChange}/> 
-  
-  
-  {currentChat===undefined?<Welcome currentUser={currentUser} />:
-  <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />}
-</div>
+            }
+        }
+        fetchData();
+    }, [currentUser]);
+    const handleChatChange = (chat) => {
+        setCurrentChat(chat)
+    }
+    useEffect(() => {
+        if (currentUser) {
+            socket.current = io(host);
+            socket.current.emit("add-user", currentUser._id);
+        }
+    }, [currentUser])
 
-    </Container>
+    return (<>
+        <Container>
+            <div className='container'>
+                <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+                {currentChat === undefined ? <Welcome currentUser={currentUser} /> :
+                <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
+            </div>
+        </Container>
     </>
-  )
+    )
 }
 
 
