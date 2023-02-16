@@ -3,7 +3,7 @@ import React, { createContext } from "react"
 
 const UserContext = createContext(
     {
-        userID: null,
+        userID: "",
         setUserID: (status) => { },
     });
 
