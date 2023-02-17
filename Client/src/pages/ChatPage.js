@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {useNavigate} from 'react-router-dom';
 import Contacts from '../component/ChatRoom/Contacts';
 import Welcome from '../component/ChatRoom/Welcome';
-import ChatRoom from '../component/ChatRoom/ChatRoom';
+import Chat from '../component/ChatRoom/Chat';
 import {io}  from 'socket.io-client';
 import { DINOSPost } from '../scripts/backend-functions'
 import {allUsersRoute, host} from '../utils/Routes'
@@ -45,6 +45,7 @@ function ChatPage() {
   }, [currentUser]);
   const handleChatChange = (chat) =>{
     setCurrentChat(chat)
+    console.log("current chat changed", chat)
   }
 useEffect(()=>{
   if(currentUser){
@@ -60,7 +61,7 @@ useEffect(()=>{
   
   
   {currentChat===undefined?<Welcome currentUser={currentUser} />:
-  <ChatRoom currentChat={currentChat} currentUser={currentUser} socket={socket} />}
+  <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
 </div>
 
     </Container>

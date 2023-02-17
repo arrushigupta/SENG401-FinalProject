@@ -1,103 +1,104 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import ChatInput from './ChatInput';
-import { v4 as uuidv4 } from 'uuid';
-import { DINOSPost } from '../../scripts/backend-functions'
-import LoadingContext from "../../context/LoadingContext";
+import axios from 'axios';
+import LogOut from './LogOut';
+
+import { addMessageRoute,  getAllMessagesRoute} from "../../utils/Routes";
+
+import {v4 as uuidv4} from 'uuid';
 
 
+export default function ChatContainer({currentChat ,currentUser,socket}) {
 
-export default function Chat({ currentChat, currentUser, socket }) {
-
-    const { setLoading } = useContext(LoadingContext);
-
-    const [messages, setMessages] = useState([]);
-    const [arrivalMessage, setArrivalMessage] = useState([]);
-    const scrollRef = useRef();
+    const [messages,setMessages] = useState([]);
+    const [arrivalMessage,setArrivalMessage] = useState([]);
+    const scrollRef =useRef();
     useEffect(() => {
         async function fetchData() {
-            DINOSPost('http://localhost:4000/api/getMessage', setLoading, {
-                from: currentUser._id,
-                to: currentChat._id
-            })
-                .then((response) => { setMessages(response.data); })
+            const response = await axios.post(getAllMessagesRoute,{
+                from:currentUser._id,
+                to:currentChat._id,}
+               
+        );
+               setMessages(response.data);
+            
+        
         }
         fetchData();
-    }, [currentChat]);
+      }, [currentChat]);
 
-    const handleSendMsg = async (msg) => {
+ const handleSendMsg = async (msg) =>{
+     const data= await axios.post(addMessageRoute,{
+        from:currentUser._id,
+        to:currentChat._id,
+        message:msg,
+    });
+    socket.current.emit("send-msg",{
+      from:currentUser._id,
+      to:currentChat._id,
+      message:msg,
+    });
 
+   const msgs = [...messages];
+   msgs.push({fromSelf:true,message:msg});
+   setMessages(msgs);
 
-        const data = DINOSPost('http://localhost:4000/api/addmsg', setLoading, {
-            from: currentUser._id,
-            to: currentChat._id,
-            message: msg,
-        })
+    
+ }
+ useEffect(()=>{
+  if(socket.current){
+    socket.current.on("msg-receive",(msg)=>{
+          setArrivalMessage({fromSelf:false,message:msg});
+    });
+  }
+},[])
 
+ useEffect(()=>
+ {
+    arrivalMessage&&setMessages((prev)=>[...prev,arrivalMessage]);
 
-        socket.current.emit("send-msg", {
-            from: currentUser._id,
-            to: currentChat._id,
-            message: msg,
-        });
-
-        const msgs = [...messages];
-        msgs.push({ fromSelf: true, message: msg });
-        setMessages(msgs);
-
-
-    }
-    useEffect(() => {
-        if (socket.current) {
-            socket.current.on("msg-receive", (msg) => {
-                setArrivalMessage({ fromSelf: false, message: msg });
-            });
-        }
-    }, [])
-
-    useEffect(() => {
-        arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
-
-    }, [arrivalMessage]);
-    useEffect(() => {
-        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
+ },[arrivalMessage]);
+ useEffect(()=>{
+  scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+ },[messages]);
     return (
-        <Container><div className='chat-header'>
-            <div className='user-details'>
-                <div className='avatar'>
-                    <img
-                        src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
-                        alt="avatar"
+    <Container><div className='chat-header'>
+        <div className='user-details'>
+            <div className='avatar'>
+            <img
+                      src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
+                      alt="avatar"
                     />
-                </div>
+                    </div>
                 <div className='username'>
-                    <h3>{currentChat.username}</h3>
-
-                </div>
-
+                 <h3>{currentChat.username}</h3>   
+                
             </div>
+           
         </div>
-            <div className='chat-messages' >
-
-                {messages.map((message) => {
-                    return (
-                        <div ref={scrollRef} key={uuidv4()}>
-                            <div className={`message ${message.fromSelf ? "sended" : "recieved"}`}>
-                                <div className='content'>
-                                    <p>
-                                        {message.message}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>)
-                })}
-
-
+        <LogOut />
+    </div>
+    <div className='chat-messages' >
+      
+        {messages.map((message)=>{
+            return(
+              <div ref={scrollRef} key={uuidv4()}>
+            <div    className={`message ${message.fromSelf?"sended":"recieved"}`}>
+                <div className='content'>
+                    <p>
+                        {message.message}
+                    </p>
+                </div>
             </div>
-            <ChatInput handleSendMsg={handleSendMsg} />
-        </Container>
-    )
+            </div>)
+        })}
+      
+
+    </div>
+   <ChatInput  handleSendMsg={handleSendMsg} />
+    </Container>
+  )
 }
 
 const Container = styled.div`
