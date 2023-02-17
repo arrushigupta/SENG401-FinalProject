@@ -13,6 +13,9 @@ import UserContext from "./context/UserContext";
 import ProtectedRoute from './component/ProtectedRoute';
 import SettingsPage from './pages/Settings';
 import UserPage from './pages/User';
+import ChatPage from './pages/ChatPage';
+import SetAvatar from './component/ChatRoom/SetAvatar';
+
 
 
 function App() {
@@ -23,8 +26,6 @@ function App() {
   return (
 
     <div className="App">
-      <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
           <LoadingContext.Provider value={{ loading, setLoading }}>
             <UserContext.Provider value={{ userID, setUserID }}>
               <BrowserRouter>
@@ -35,12 +36,13 @@ function App() {
                   <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
                   <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
                   <Route path="/user" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
+                  <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
+                  <Route path="/setAvatar" element={<ProtectedRoute><SetAvatar/></ProtectedRoute>}/>
+
                 </Routes>
               </BrowserRouter>
             </UserContext.Provider>
           </LoadingContext.Provider>
-        </div>
-      </div>
     </div>
   );
 }

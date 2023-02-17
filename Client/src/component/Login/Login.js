@@ -9,6 +9,9 @@ import { DINOSPost } from '../../scripts/backend-functions'
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import { loginRoute } from '../../utils/Routes';
+
 
 const fields = loginFields;
 let fieldsState = {};
@@ -17,11 +20,19 @@ fields.forEach(field => fieldsState[field.id] = '');
 export default function Login() {
     const navigate = useNavigate();
     const { setLoading } = useContext(LoadingContext);
+    const { setUserID } = useContext(UserContext);
+    
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [invalid, setInvalid] = useState(false);
     const [loginState, setLoginState] = useState(fieldsState);
 
+
+    // useEffect(() => {
+    //     if (localStorage.getItem("chat-app-user")) {
+    //         navigate("/chat");
+    //     }
+    // }, []);
 
     const handleChange = (e) => {
         setLoginState({ ...loginState, [e.target.id]: e.target.value })
@@ -70,11 +81,16 @@ export default function Login() {
 
                         setUserName(loginState.username);
                         setLoginState('')
-
+                        setUserID(response._id)
+                        localStorage.setItem('chat-app-user', JSON.stringify(response));
+                        console.log( JSON.parse(localStorage.getItem("chat-app-user")))
+                        console.log(JSON.parse(localStorage.getItem("chat-app-user")).username)
+                        console.log(JSON.parse(localStorage.getItem("chat-app-user"))._id)
+                        
                         notify("success")
                         setTimeout(() => {
                             console.log("Delayed for 3 second.");
-                            //   navigate("/")
+                            navigate("/chat")
                         }, "3000")
                     } else {
                         notify("error")
@@ -92,6 +108,7 @@ export default function Login() {
 
 
     return (
+        
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <ToastContainer position="top-center"
                 autoClose={5000}
@@ -127,5 +144,6 @@ export default function Login() {
             <FormAction handleSubmit={handleSubmit} text="Login" />
 
         </form>
+
     )
 }

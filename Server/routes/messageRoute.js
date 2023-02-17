@@ -48,41 +48,4 @@ router.post("/addmsg", async (req, res, next) => {
 
 });
 
-router.post("/setavatar/:id", async (req, res, next) => {
-    try {
-        const userid = req.params.id;
-
-        const avatarImage = req.body.image;
-
-        const userData = await User.findByIdAndUpdate(userid,
-
-            {
-                isAvatarImageSet: true,
-                avatarImage
-            },
-            { new: true }
-
-        );
-        return res.json({ isSet: userData.isAvatarImageSet, image: userData.avatarImage });
-    } catch (ex) {
-        next(ex);
-    }
-
-})
-
-router.post("/allusers/:id", async (req, res, next) => {
-    try {
-        const users = await User.find({ _id: { $ne: req.params.id } }).select([
-            "username",
-            "avatarImage",
-            "email",
-            "_id"
-        ]);
-        return res.json(users);
-    } catch (ex) {
-        next(ex);
-
-    }
-})
-
 module.exports = router;

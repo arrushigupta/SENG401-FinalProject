@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import styled from 'styled-components'
-import ChatInput from './Chatinput';
+import ChatInput from './ChatInput';
 import { v4 as uuidv4 } from 'uuid';
 import { DINOSPost } from '../../scripts/backend-functions'
+import LoadingContext from "../../context/LoadingContext";
 
 
 
 export default function Chat({ currentChat, currentUser, socket }) {
+
+    const { setLoading } = useContext(LoadingContext);
 
     const [messages, setMessages] = useState([]);
     const [arrivalMessage, setArrivalMessage] = useState([]);
@@ -74,7 +77,6 @@ export default function Chat({ currentChat, currentUser, socket }) {
                 </div>
 
             </div>
-            <LOgOut />
         </div>
             <div className='chat-messages' >
 

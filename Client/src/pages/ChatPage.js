@@ -1,13 +1,15 @@
 import React, {useState,useEffect, useRef}from 'react'
+import axios from 'axios';
 import styled from 'styled-components'
 import {useNavigate} from 'react-router-dom';
 import Contacts from '../component/ChatRoom/Contacts';
 import Welcome from '../component/ChatRoom/Welcome';
-import Chat from '../component/ChatRoom/Chat';
+import ChatRoom from '../component/ChatRoom/ChatRoom';
 import {io}  from 'socket.io-client';
-import { DINOSPost } from '../../scripts/backend-functions'
+import { DINOSPost } from '../scripts/backend-functions'
+import {allUsersRoute, host} from '../utils/Routes'
 
-function Chat() {
+function ChatPage() {
   const socket = useRef();
   const navigate = useNavigate();
   const [currentUser,setCurrentUser] = useState(undefined);
@@ -15,10 +17,12 @@ function Chat() {
   const [currentChat,setCurrentChat] = useState(undefined);
   useEffect(() => {
     async function fetchData() {
-      if (!localStorage.getItem("chat-app-user")){
-      navigate("/login");}
+      let userData= await JSON.parse(localStorage.getItem("chat-app-user"))
+      if (!userData){
+      navigate("/");}
       else{
-        setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+        setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user"))); //user info, id, username, email
+        console.log(await JSON.parse(localStorage.getItem("chat-app-user")))
       }
     }
     fetchData();
@@ -28,7 +32,9 @@ function Chat() {
       if (currentUser) {
         if (currentUser.isAvatarImageSet) {
           const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-          
+          console.log("User data", currentUser)
+          console.log("Contact data for all users", data)
+
           setContacts(data.data);
         }else {
           navigate('/setAvatar');
@@ -54,7 +60,7 @@ useEffect(()=>{
   
   
   {currentChat===undefined?<Welcome currentUser={currentUser} />:
-  <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />}
+  <ChatRoom currentChat={currentChat} currentUser={currentUser} socket={socket} />}
 </div>
 
     </Container>
@@ -84,4 +90,4 @@ height: 100vh;
   }
 `;
 
-export default Chat
+export default ChatPage

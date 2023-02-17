@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components';
-import Logo  from "../assets/logo.svg"
+// import Logo  from "../../assets/logo.svg"
+import Logo from "../../img/dinosM.png"
 function Contacts({contacts,currentUser,changeChat}) {
     const[currentUserName,setCurrentUserName] = useState(undefined);
     const[currentUserImage,setCurrentUserImage] = useState(undefined);
@@ -10,8 +11,22 @@ function Contacts({contacts,currentUser,changeChat}) {
         if(currentUser){
             setCurrentUserName(currentUser.username);
             setCurrentUserImage(currentUser.avatarImage);
+            console.log(currentUser.username)
+            console.log(currentUser.avatarImage)
+
+            
         }
     },[currentUser]);
+
+    useEffect(()=>
+    { 
+        if(contacts){
+           console.log("received contacts", contacts)
+            
+        }
+    },[contacts]);
+
+
     const changeCurrentChat = (index,contact)=>{
         setCurrentSelected(index);
         changeChat(contact);

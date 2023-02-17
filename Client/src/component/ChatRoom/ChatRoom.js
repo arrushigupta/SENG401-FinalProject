@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 import Contacts from './Contacts';
 import Chat from './Chat';
+import Welcome from './Welcome';
 import { io } from 'socket.io-client';
 import { DINOSPost } from '../../scripts/backend-functions'
+import LoadingContext from "../../context/LoadingContext";
+import {allUsersRoute, host} from '../../utils/Routes'
 
 
 function ChatRoom() {
     const socket = useRef();
     const navigate = useNavigate();
+    const { setLoading } = useContext(LoadingContext);
     const [currentUser, setCurrentUser] = useState(undefined);
     const [contacts, setContacts] = useState([]);
     const [currentChat, setCurrentChat] = useState(undefined);
@@ -54,8 +58,8 @@ function ChatRoom() {
         <Container>
             <div className='container'>
                 <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
-                {currentChat === undefined ? <Welcome currentUser={currentUser} /> :
-                <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
+                {/* {currentChat === undefined ? <Welcome currentUser={currentUser} /> : */}
+                {/* <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />} */}
             </div>
         </Container>
     </>

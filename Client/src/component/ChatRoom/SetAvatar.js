@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { Buffer } from "buffer";
-import loader from "../assets/loader.gif";
+import loader from "../../assets/loader.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { setAvatarRoute } from "../utiles/APIRputes";
+import { setAvatarRoute } from "../../utils/Routes";
 export default function SetAvatar() {
   const api = `https://api.multiavatar.com/Starcrasher.svg`;
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function SetAvatar() {
       const user = await JSON.parse(
         localStorage.getItem("chat-app-user")
       );
+      console.log("Current user in setAvatar page", user )
 
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
@@ -47,7 +49,7 @@ export default function SetAvatar() {
           "chat-app-user",
           JSON.stringify(user)
         );
-        navigate("/");
+        navigate("/chat");
       } else {
         toast.error("Error setting avatar. Please try again.", toastOptions);
       }
