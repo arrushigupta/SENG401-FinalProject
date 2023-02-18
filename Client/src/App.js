@@ -5,7 +5,7 @@ import LoginPage from "./pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingContext from "./context/LoadingContext";
 import UserContext from "./context/UserContext";
-import Map from "./component/Map/Map";
+import OurMap from "./component/Map/Map";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<LoginPage />} />
                   <Route path="/signup" element={<SignupPage />} />
-                  <Route path="/map" element={<Map />} />
+                  <Route path="/map" element={<OurMap />} />
                 </Routes>
               </BrowserRouter>
             </UserContext.Provider>
