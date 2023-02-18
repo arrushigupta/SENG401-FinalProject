@@ -15,6 +15,7 @@ function ChatPage() {
   const [currentUser,setCurrentUser] = useState(undefined);
   const [contacts,setContacts]= useState([]);
   const [currentChat,setCurrentChat] = useState(undefined);
+
   useEffect(() => {
     async function fetchData() {
       let userData= await JSON.parse(localStorage.getItem("chat-app-user"))
@@ -27,6 +28,7 @@ function ChatPage() {
     }
     fetchData();
   }, []);
+
   useEffect(() => {
     async function fetchData() {
       if (currentUser) {
@@ -43,28 +45,30 @@ function ChatPage() {
     }
     fetchData();
   }, [currentUser]);
+
   const handleChatChange = (chat) =>{
     setCurrentChat(chat)
     console.log("current chat changed", chat)
   }
-useEffect(()=>{
-  if(currentUser){
-    socket.current = io(host);
-    socket.current.emit("add-user",currentUser._id);
-  } 
-},[currentUser])
+  
+  useEffect(()=>{
+    if(currentUser){
+      socket.current = io(host);
+      socket.current.emit("add-user",currentUser._id);
+    } 
+  },[currentUser])
 
   return (<>
-    <Container>
-<div className='container'>
-  <Contacts contacts={contacts} currentUser={currentUser}  changeChat={handleChatChange}/> 
-  
-  
-  {currentChat===undefined?<Welcome currentUser={currentUser} />:
-  <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
-</div>
+      <Container>
+        <div className='container'>
+          <Contacts contacts={contacts} currentUser={currentUser}  changeChat={handleChatChange}/> 
+          
+          
+          {currentChat===undefined?<Welcome currentUser={currentUser} />:
+          <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
+        </div>
 
-    </Container>
+      </Container>
     </>
   )
 }
