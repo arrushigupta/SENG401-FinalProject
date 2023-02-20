@@ -20,7 +20,6 @@ import SetAvatar from './component/ChatRoom/SetAvatar';
 
 function App() {
   const [loading, setLoading] = useState(false);
-
   const [userID, setUserID] = useState("");
 
   return (
@@ -37,7 +36,6 @@ function App() {
                   <Route path="/user" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
                   <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
                   <Route path="/setAvatar" element={<ProtectedRoute><SetAvatar/></ProtectedRoute>}/>
-
                 </Routes>
               </BrowserRouter>
             </UserContext.Provider>
