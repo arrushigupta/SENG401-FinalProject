@@ -127,6 +127,31 @@ router.post('/register', async (req, res) => {
   });
 })
 
+// The following are apis for products, should we put them in their page to have microservice architecture? --------------
+router.post('/postProduct', async (req, res) => {
+  
+  console.log(req.body);
+  
+    // const data = new ProductModel({
+    //   username: req.body.username,
+    //   email: req.body.email,
+    //   password: hash,
+
+    // })
+    // try {
+    //   const dataToSave = await data.save();
+    //   res.status(200).json({ ...dataToSave, status: "success" })
+    // }
+    // catch (error) {
+
+    //   res.status(400).json({ message: error.message, status: "error" })
+    // };
+})
+
+
+
+// -------------------------------------------------------------------------------------------------------------------------
+
 router.post("/setavatar/:id", async (req, res, next) => {
   // console.log("setAvatar is called", req)
   try {

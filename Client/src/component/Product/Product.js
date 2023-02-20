@@ -1,6 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { DINOSGet } from '../../scripts/backend-functions'
+import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
+import Input from "../Login/Input";
+
 
 
 export default function Product(){
@@ -16,7 +18,30 @@ export default function Product(){
         image: null,
     });
 
-    const [users, setUsers] = useState({})
+
+    // Updates from values on input change
+    const handleInputUpdate = (event) => {
+        setProduct({
+            ...product,
+            [event.target.name]: event.target.value
+        });
+    }
+
+    // Trying to connect backend to post product
+    const handleSubmit = (event) => {
+
+        // console.log(product);
+        DINOSPost("http://localhost:4000/api/postProduct", setLoading, { ...product, name: product.name }).then((response) => {
+            setProduct({
+                name: "",
+                description: "",
+                price: 0,
+                image: null,
+            });
+            // loadNotes();
+            // setAddNotesOpen(false);
+        });
+    }
 
     useEffect(() => {
         // DINOSGet("http://localhost:4000/api/getAll", setLoading, setUsers);
@@ -47,41 +72,8 @@ export default function Product(){
                 </div>
             </div>
         </div>
+
         </>
     )
 
 }
-
-// //Handle Login API Integration here
-// const authenticateUser = async () => {
-//     try {
-//         DINOSPost('http://localhost:4000/api/login', setLoading, { email: loginState.email, password: loginState.password }).then(
-//             (response) => {
-//                 console.log(response);
-
-//                 if (response.status === "success") {
-
-//                     setUserName(loginState.username);
-//                     setLoginState('')
-//                     setUserID(response._id)
-//                     localStorage.setItem('chat-app-user', JSON.stringify(response));
-//                     console.log( JSON.parse(localStorage.getItem("chat-app-user")))
-//                     console.log(JSON.parse(localStorage.getItem("chat-app-user")).username)
-//                     console.log(JSON.parse(localStorage.getItem("chat-app-user"))._id)
-                    
-//                     notify("success")
-//                     setTimeout(() => {
-//                         console.log("Delayed for 3 second.");
-//                         navigate("/chat")
-//                     }, "3000")
-//                 } else {
-//                     notify("error")
-
-//                 }
-
-//             }
-//         )
-//     } catch (error) {
-//         notify('error')
-//         console.log(error.message)
-//     }

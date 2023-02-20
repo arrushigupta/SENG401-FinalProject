@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema(
         required: true
     }, 
     images:[], // images are not required in Javi's opinion
+    
     date: {
         required: true, 
         type: Date, 
