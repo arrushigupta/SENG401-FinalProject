@@ -18,42 +18,6 @@ export default function Product(){
         image: null,
     });
 
-
-    // Updates from values on input change
-    const handleInputUpdate = (event) => {
-        setProduct({
-            ...product,
-            [event.target.name]: event.target.value
-        });
-    }
-
-    // Trying to connect backend to post product
-    const handleSubmit = (event) => {
-
-        // console.log(product);
-        DINOSPost("http://localhost:4000/api/postProduct", setLoading, { ...product, name: product.name }).then((response) => {
-            setProduct({
-                name: "",
-                description: "",
-                price: 0,
-                image: null,
-            });
-            // loadNotes();
-            // setAddNotesOpen(false);
-        });
-    }
-
-    useEffect(() => {
-        // DINOSGet("http://localhost:4000/api/getAll", setLoading, setUsers);
-        // setLoading(false);
-
-        console.log( JSON.parse(localStorage.getItem("chat-app-user")));
-        console.log(JSON.parse(localStorage.getItem("chat-app-user")).username);
-        console.log(JSON.parse(localStorage.getItem("chat-app-user"))._id);
-
-    },[]);
-
-
     return(
         <>
         <div>

@@ -1,24 +1,21 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
-import Input from "../Login/Input";
-import DatePicker from "react-datepicker";
-import 'react-datepicker/dist/react-datepicker.css'
 import FormAction from "../Login/FormAction";
 import "../../App.css";
 
-// import DatePicker from "../Additional/DatePicker"
 
 export default function CreateProduct(){
 
     const { setLoading } = useContext(LoadingContext);
-    const [selectedDate, setSelectedDate] = useState(null);
 
     const [formValues, setFormValues] = useState({
+        userID: JSON.parse(localStorage.getItem("chat-app-user"))._id,
         name: "",
         description: "",
+        category: "",
         price: 0,
-        date: Date,
+        date: new Date(),
     });
 
 
@@ -38,13 +35,15 @@ export default function CreateProduct(){
 
         // console.log(product);
         DINOSPost("http://localhost:4000/api/postProduct", setLoading, { ...formValues, name: formValues.name, 
-            description: formValues.description, price: formValues.price}).then((response) => {
+            description: formValues.description, price: formValues.price, date: formValues.date, userID: formValues.userID}).then((response) => {
 
             setFormValues({
+                userID: JSON.parse(localStorage.getItem("chat-app-user"))._id,
                 name: "",
                 description: "",
+                category: "",
                 price: 0,
-                image: null,
+                date: new Date(),
             });
             // loadNotes();
             // setAddNotesOpen(false);
@@ -60,22 +59,11 @@ export default function CreateProduct(){
 
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
 
-            <input label="Name" name="name" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='Product Name'/><br />
-            <input label="Description" name="description" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='Description'/><br />
-            <input label="Price" name="price" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='Price'/><br />
-
-            <div className='App'>
-
-            <DatePicker
-                selected={selectedDate}
-                onChange={date => setSelectedDate(date)}
-                
-                placeholderText={'dd/mm/yyyy'}
-                filterDate={date => date.getDay() !== 6 && date.getDay() !== 0} // weekends cancel
-                showYearDropdown // year show and scrolldown alos
-                scrollableYearDropdown
-                />
-            </div>
+            <input label="Name" name="name" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" placeholder='Product Name'/><br />
+            <input label="Price" name="price" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" placeholder='Price'/><br />
+            <input label="Category" name="category" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg " placeholder='Category'/><br />
+            <input label="Description" name="description" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" placeholder='Description'/><br />
+            
             
             <FormAction handleSubmit={handleSubmit} text="Submit" />
 

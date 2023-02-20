@@ -1,6 +1,7 @@
 const express = require('express');
 const ExampleModel = require('../models/example_model');
 const UserModel = require('../models/user_model');
+const ProductModel = require('../models/product_model');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 const router = express.Router()
@@ -132,20 +133,25 @@ router.post('/postProduct', async (req, res) => {
   
   console.log(req.body);
   
-    // const data = new ProductModel({
-    //   username: req.body.username,
-    //   email: req.body.email,
-    //   password: hash,
+    const product = new ProductModel({
+      userID: req.body.userID,
+      name: req.body.name,
+      price: req.body.price,
+      category: req.body.category,
+      description: req.body.description,
+      date: req.body.date,
 
-    // })
-    // try {
-    //   const dataToSave = await data.save();
-    //   res.status(200).json({ ...dataToSave, status: "success" })
-    // }
-    // catch (error) {
+    })
 
-    //   res.status(400).json({ message: error.message, status: "error" })
-    // };
+    try {
+      const dataToSave = await product.save();
+      res.status(200).json({ ...dataToSave, status: "success" })
+    }
+    catch (error) {
+
+      res.status(400).json({ message: error.message, status: "error" })
+      console.log(error.message);
+    };
 })
 
 
