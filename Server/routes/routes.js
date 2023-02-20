@@ -12,107 +12,115 @@ module.exports = router;
 
 //Get all Method
 router.get('/getAll', (req, res) => {
-    res.send('Get All API')
+  res.send('Get All API')
 })
 
 //Get by ID Method
 router.get('/getOne/:id', (req, res) => {
-    res.send('Get by ID API')
+  res.send('Get by ID API')
 })
 
 //Update by ID Method
 router.patch('/update/:id', (req, res) => {
-    res.send('Update by ID API')
+  res.send('Update by ID API')
 })
 
 //Delete by ID Method
 router.delete('/delete/:id', (req, res) => {
-    res.send('Delete by ID API')
+  res.send('Delete by ID API')
 })
 
 router.get("/auth-endpoint", auth, (req, res) => {
-    res.json({ message: "You are authorized to access me" });
-  });
-  
+  res.json({ message: "You are authorized to access me" });
+});
+
 
 router.post("/login", (req, res) => {
-    // check if email exists
-    UserModel.findOne({ email: req.body.email })
-  
-      // if email exists
-      .then((user) => {
-        // compare the password entered and the hashed password found
-        bcrypt
-          .compare(req.body.password, user.password)
-  
-          // if the passwords match
-          .then((passwordCheck) => {
-  
-            // check if password matches
-            if(!passwordCheck) {
-              return res.status(400).send({
-                message: "Passwords does not match",
-                status:"error",
-                error,
-              });
-            }
-  
-            //   create JWT token
-            const token = jwt.sign(
-              {
-                userId: user._id,
-                userEmail: user.email,
-              },
-              "RANDOM-TOKEN",
-              { expiresIn: "24h" }
-            );
-  
-            //   return success response
-            res.status(200).send({
-              message: "Login Successful",
-              email: user.email,
-              status:"success",
-              token,
-            });
-          })
-          // catch error if password does not match
-          .catch((error) => {
-            res.status(400).send({
+  // check if email exists
+  UserModel.findOne({ email: req.body.email })
+
+    // if email exists
+    .then((user) => {
+      // compare the password entered and the hashed password found
+      bcrypt
+        .compare(req.body.password, user.password)
+
+        // if the passwords match
+        .then((passwordCheck) => {
+
+          // check if password matches
+          if (!passwordCheck) {
+            return res.status(400).send({
               message: "Passwords does not match",
-              status:"error",
+              status: "error",
               error,
             });
+          }
+
+          //   create JWT token
+          const token = jwt.sign(
+            {
+              userId: user._id,
+              userEmail: user.email,
+            },
+            "RANDOM-TOKEN",
+            { expiresIn: "24h" }
+          );
+
+          //   return success response
+          res.status(200).send({
+            message: "Login Successful",
+            email: user.email,
+            status: "success",
+            token,
           });
-      })
-      // catch error if email does not exist
-      .catch((e) => {
-        res.status(404).send({
-          message: "Email not found",
-          status:"error",
-          e,
+        })
+        // catch error if password does not match
+        .catch((error) => {
+          res.status(400).send({
+            message: "Passwords does not match",
+            status: "error",
+            error,
+          });
         });
+    })
+    // catch error if email does not exist
+    .catch((e) => {
+      res.status(404).send({
+        message: "Email not found",
+        status: "error",
+        e,
       });
-  });
-  
+    });
+});
+
 
 router.post('/register', async (req, res) => {
-    console.log(req.body);
-    // need to check if user with same email or username exists in the database
-    
+  console.log(req.body);
+  // need to check if user with same email or username exists in the database
+
+  await UserModel.findOne({
+    email: req.body.email,
+    username: req.body.username,
+  }).then(() => {
+    return res.status(400).send({
+      message: "User with email or username already exists",
+      status: "error"
+    })
+  }).catch((e) => {
     bcrypt.hash(req.body.password, 10, async function (err, hash) {
-        const data = new UserModel({
-            username: req.body.username,
-            email: req.body.email,
-            password: hash,
-            
-        })
-        try {
-            const dataToSave = await data.save();
-            res.status(200).json({...dataToSave, status:"success"})
-        }
-        catch (error) {
-                
-                res.status(400).json({ message: error.message, status:"error" })
-        }
+      const data = new UserModel({
+        username: req.body.username,
+        email: req.body.email,
+        password: hash,
+      })
+      try {
+        const dataToSave = await data.save();
+        res.status(200).json({ ...dataToSave, status: "success" });
+      }
+      catch (error) {
+        res.status(400).json({ message: error.message, status: "error" });
+      }
     });
+  })
 })
