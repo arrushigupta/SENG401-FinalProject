@@ -75,20 +75,21 @@ function ChatPage() {
 
 
 const Container = styled.div`
-height: 100vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: #FCFFE7;
   .container {
+    border-radius: 0.4rem;
     height: 85vh;
     width: 85vw;
-    background-color: #00000076;
+    background-color: #E64848;
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 30% 70%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-columns: 35% 65%;
     }
