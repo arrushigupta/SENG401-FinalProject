@@ -14,6 +14,8 @@ import ProtectedRoute from './component/ProtectedRoute';
 import SettingsPage from './pages/Settings';
 import UserPage from './pages/User';
 import ChatPage from './pages/ChatPage';
+import DashboardPage from './pages/DashboardPage';
+
 import SetAvatar from './component/ChatRoom/SetAvatar';
 
 
@@ -31,7 +33,9 @@ function App() {
                 <Routes>
                   <Route path="/" element={<LoginPage />} />
                   <Route path="/signup" element={<SignupPage />} />
-                  <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />                  
+                  <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />  
+                  <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />                  
+
                   <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
                   <Route path="/user" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
                   <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />

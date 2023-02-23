@@ -23,6 +23,7 @@ function Posts() {
 function Dashboard() {
 
     return (<div>
+        <p>test</p>
         <NavBar></NavBar>
     </div>);
 }
