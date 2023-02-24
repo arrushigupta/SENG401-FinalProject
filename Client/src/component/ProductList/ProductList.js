@@ -27,10 +27,13 @@ export default function ProductList() {
 
     return (
         <>
-            <div class="py-24">            
+            <div className="py-24">            
             <Product />
+            <br></br>
             <Product />
+            <br></br>
             <Product />
+            <br></br>
             
             </div>
         </>
