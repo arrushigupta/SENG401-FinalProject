@@ -91,7 +91,7 @@ export default function Login() {
                         setTimeout(() => {
                             console.log("Delayed for 3 second.");
                             navigate("/dashboard")
-                        }, "3000")
+                        }, "1000")
                     } else {
                         notify("error")
 
