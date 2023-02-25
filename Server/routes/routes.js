@@ -140,7 +140,6 @@ router.post('/postProduct', async (req, res) => {
       category: req.body.category,
       description: req.body.description,
       date: req.body.date,
-
     })
 
     try {
@@ -154,7 +153,42 @@ router.post('/postProduct', async (req, res) => {
     };
 })
 
+// return all products by the date they were created
+router.get('/getAllProducts', async (req, res) => {
+  
+  console.log(req.body);
+  
+  ProductModel.find({}).sort({_id: -1}).exec((error, products) => {
+    if (error) {
+      console.log('Error retrieving products:', error);
+      return res.status(400).json({ message: error.message, status: "error" })
+    }
+    console.log('Retrieved products:', products);
+    return res.json(products);
+    
+  });
+})
 
+// filter products by searching a specific type(attribute), then filter that type by the value param
+// This should be the only API endpoint needed for filtering data related to products
+// example localhost:4000/api/getSpecificProducts/name/h
+
+router.get('/getSpecificProducts/:type/:value', (req, res) => {
+
+  const type = req.params.type;
+  const value = req.params.value;
+  const filter = {};
+  filter[type] = value;
+
+  ProductModel.find(filter, (err, products) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error retrieving products');
+    } else {
+      res.send(products);
+    }
+  });
+});
 
 // -------------------------------------------------------------------------------------------------------------------------
 
