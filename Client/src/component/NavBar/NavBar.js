@@ -14,7 +14,7 @@ export default function NavBar() {
     const handleNavigateChatRoom = (e) => {
         
             console.log("NavBar userID:", userID);
-            navigate("/dashboard")
+            navigate("/chat")
         
     }
 

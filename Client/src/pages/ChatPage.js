@@ -6,8 +6,8 @@ import Contacts from '../component/ChatRoom/Contacts';
 import Welcome from '../component/ChatRoom/Welcome';
 import Chat from '../component/ChatRoom/Chat';
 import {io}  from 'socket.io-client';
-import { DINOSPost } from '../scripts/backend-functions'
 import {allUsersRoute, host} from '../utils/Routes'
+import LogOut from '../component/ChatRoom/LogOut';
 
 function ChatPage() {
   const socket = useRef();
