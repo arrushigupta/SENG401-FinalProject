@@ -1,27 +1,30 @@
-import React, {useState,useEffect, useRef}from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import styled from 'styled-components'
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Contacts from '../component/ChatRoom/Contacts';
 import Welcome from '../component/ChatRoom/Welcome';
 import Chat from '../component/ChatRoom/Chat';
-import {io}  from 'socket.io-client';
-import {allUsersRoute, host} from '../utils/Routes'
+import { io } from 'socket.io-client';
+import { allUsersRoute, host } from '../utils/Routes'
 import LogOut from '../component/ChatRoom/LogOut';
-
+import Map from "../component/Map/Map"
 function ChatPage() {
   const socket = useRef();
   const navigate = useNavigate();
-  const [currentUser,setCurrentUser] = useState(undefined);
-  const [contacts,setContacts]= useState([]);
-  const [currentChat,setCurrentChat] = useState(undefined);
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [contacts, setContacts] = useState([]);
+  const [currentChat, setCurrentChat] = useState(undefined);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
 
   useEffect(() => {
     async function fetchData() {
-      let userData= await JSON.parse(localStorage.getItem("chat-app-user"))
-      if (!userData){
-      navigate("/");}
-      else{
+      let userData = await JSON.parse(localStorage.getItem("chat-app-user"))
+      if (!userData) {
+        navigate("/");
+      }
+      else {
         setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user"))); //user info, id, username, email
         console.log(await JSON.parse(localStorage.getItem("chat-app-user")))
       }
@@ -38,7 +41,7 @@ function ChatPage() {
           console.log("Contact data for all users", data)
 
           setContacts(data.data);
-        }else {
+        } else {
           navigate('/setAvatar');
         }
       }
@@ -46,30 +49,33 @@ function ChatPage() {
     fetchData();
   }, [currentUser]);
 
-  const handleChatChange = (chat) =>{
+  const handleChatChange = (chat) => {
     setCurrentChat(chat)
     console.log("current chat changed", chat)
   }
-  
-  useEffect(()=>{
-    if(currentUser){
+
+  useEffect(() => {
+    if (currentUser) {
       socket.current = io(host);
-      socket.current.emit("add-user",currentUser._id);
-    } 
-  },[currentUser])
+      socket.current.emit("add-user", currentUser._id);
+    }
+  }, [currentUser])
 
   return (<>
-      <Container>
-        <div className='container'>
-          <Contacts contacts={contacts} currentUser={currentUser}  changeChat={handleChatChange}/> 
-          
-          
-          {currentChat===undefined?<Welcome currentUser={currentUser} />:
-          <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
-        </div>
+    <Container>
+      <div className='container'>
+        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
 
-      </Container>
-    </>
+
+        {currentChat === undefined ? <Welcome currentUser={currentUser} /> :
+          <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
+        <div>
+          <Map setSelectedLocation={setSelectedLocation} />
+        </div>
+      </div>
+
+    </Container>
+  </>
   )
 }
 
