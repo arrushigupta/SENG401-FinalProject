@@ -3,6 +3,7 @@ import NavBar from "../component/NavBar/NavBar"
 import CreateProduct from "../component/Product/CreateProduct"
 
 export default function DashboardPage() {
+    
     return (
         <>
             <NavBar />
