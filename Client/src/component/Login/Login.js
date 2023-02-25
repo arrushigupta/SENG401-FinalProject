@@ -48,7 +48,7 @@ export default function Login() {
         if (label === "success") {
             toast.success('User Login Succeeded', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -89,9 +89,9 @@ export default function Login() {
                         
                         notify("success")
                         setTimeout(() => {
-                            console.log("Delayed for 3 second.");
+                            console.log("Delayed for 1 second.");
                             navigate("/dashboard")
-                        }, "1000")
+                        }, "1800")
                     } else {
                         notify("error")
 
@@ -111,7 +111,7 @@ export default function Login() {
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <ToastContainer position="top-center"
-                autoClose={5000}
+                autoClose={1800}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
