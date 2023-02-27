@@ -69,9 +69,9 @@ function ChatPage() {
 
         {currentChat === undefined ? <Welcome currentUser={currentUser} /> :
           <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
-        <div>
+        {/* <div>
           <Map setSelectedLocation={setSelectedLocation} />
-        </div>
+        </div> */}
       </div>
 
     </Container>

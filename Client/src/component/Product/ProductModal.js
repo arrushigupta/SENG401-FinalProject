@@ -2,14 +2,35 @@ import React, { useEffect, useContext, useState } from 'react'
 import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
 import img from '../../img/Gorilla.jpg';
-
+import axios from 'axios';
+import { addMessageRoute } from "../../utils/Routes";
 
 
 export default function ProductModal({ name, description, price, setShowModal}){
     
     const { setLoading } = useContext(LoadingContext);
 
+    // const handleSendMsg = async (msg) => {
+    //   const data = await axios.post(addMessageRoute, {
+    //     from: currentUser._id,
+    //     to: currentChat._id,
+    //     message: msg,
+    //   });
+    //   socket.current.emit("send-msg", {
+    //     from: currentUser._id,
+    //     to: currentChat._id,
+    //     message: msg,
+    //   });
+  
+    //   const msgs = [...messages];
+    //   msgs.push({ fromSelf: true, message: msg });
+    //   setMessages(msgs);
+  
+  
+    // }
+    
     // possibly will add an array of tags
+
 
 
 
@@ -73,6 +94,7 @@ export default function ProductModal({ name, description, price, setShowModal}){
                     type="button"
                     onClick={() => {
                         setShowModal(false);
+
                         console.log("Sending message, funct not implemented")
                     }}
                   >
