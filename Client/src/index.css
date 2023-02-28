@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,6 +10,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:rgb(237, 242, 244);
+  
 }
 
 code {
@@ -48,6 +51,11 @@ code {
   z-index: 1;
   /* align-items:  */
   
+}
+
+.center-form{
+  margin: 0 auto; 
+  width: 100%;
 }
 
 #inbox h1 {
@@ -102,4 +110,8 @@ code {
   margin-top: 3px;
   margin-right: 100%;
 
+}
+
+#navbar{
+  background-color: #8d99ae;
 }

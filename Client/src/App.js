@@ -26,7 +26,7 @@ function App() {
 
   return (
 
-    <div className="App">
+    <div className="App ">
           <LoadingContext.Provider value={{ loading, setLoading }}>
             <UserContext.Provider value={{ userID, setUserID }}>
               <BrowserRouter>
