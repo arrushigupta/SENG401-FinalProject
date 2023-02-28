@@ -6,7 +6,7 @@ import ProductModal from './ProductModal';
 
 
 
-export default function Product({ name, description, price}){
+export default function Product({ name, description, price, userID}){
 
     const { setLoading } = useContext(LoadingContext);
 
@@ -41,6 +41,7 @@ export default function Product({ name, description, price}){
                     <div class="font-bold text-xl mb-2">{name}</div>
                     <p class="text-gray-700 text-base">{description}</p>
                     <p class="font-bold text-lg mb-2">${price}</p>
+                    <p class="font-bold text-lg mb-2">${userID}</p>
                 </div>
                 <div class="px-6 pt-1 pb-2">
                     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>

@@ -8,7 +8,7 @@ export default function HomePage() {
         <>
             <NavBar />
             <div class="py-24">
-            <h1>My username is: {JSON.parse(localStorage.getItem("chat-app-user")).username}</h1>
+            {/* <h1>My username is: {JSON.parse(localStorage.getItem("chat-app-user")).username}</h1> */}
             <h1> Home </h1>
             <ProductList />
             <CreateProduct/>
