@@ -32,7 +32,7 @@ export default function Product({ name, description, price, userID}){
 
     return(
         <>
-        <div class = " rounded-lg bg-slate-100 hover:bg-slate-400 hover:shadow-xl active:bg-slate-500 m-4"
+        <div class = " rounded-lg bg-slate-100 hover:bg-red-600 hover:shadow-xl active:bg-red-700 m-4 md:hover:text-neutral-50"
              onClick={loadModal}>
             
             <div class="max-w-sm rounded overflow-hidden shadow-lg ">
