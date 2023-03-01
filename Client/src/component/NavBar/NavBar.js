@@ -2,6 +2,7 @@ import img from '../../img/dinos.png';
 import React, { useContext } from "react";
 import UserContext from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
+import Button from '../Additional/Button'
 
 
 
@@ -17,6 +18,12 @@ export default function NavBar() {
             navigate("/chat")
         
     }
+
+    const handleClick = () => {
+        // console.log('Button clicked!');
+        navigate("/")
+        
+      };
 
     return (
         <nav id= "navbar" class="bg-white px-2 sm:px-4 py-2.5 dark:bg-black fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
@@ -43,7 +50,8 @@ export default function NavBar() {
                     </ul>
                 </div>
                 <div class="flex md:order-2">
-                    <button type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
+                    {/* <button type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button> */}
+                    <Button onClick={handleClick} label="Sign Out" />
                 </div>
             </div>
         </nav>
