@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 // import Logo  from "../../assets/logo.svg"
 import Logo from "../../img/dinosM.png"
+import Button from '../Additional/Button'
+
+
 function DashboardContacts({ contacts, currentUser, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
@@ -51,9 +54,11 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
         currentUserName && currentUserImage && (
           <div>
             <div class="text-center absolute mt-20">
-              {<button class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" onClick={handleOpenDrawer}>
+              {/* {<button class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" onClick={handleOpenDrawer}>
                 Show Inbox
-              </button>}
+              </button>} */}
+              <Button onClick={handleOpenDrawer} label="Show Inbox" />
+
             </div>
             {drawerOpen && <div
               className={
