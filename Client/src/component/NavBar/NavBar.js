@@ -1,4 +1,4 @@
-import img from '../../img/dinos.png';
+import img from '../../img/dinosM.png';
 import React, { useContext } from "react";
 import UserContext from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
