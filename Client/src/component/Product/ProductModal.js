@@ -47,7 +47,7 @@ export default function ProductModal({ name, description, price, setShowModal}){
           <div
             className="justify-center items-center mt-5 mb-5 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
-            <div className="relative w-auto h-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-fit h-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
