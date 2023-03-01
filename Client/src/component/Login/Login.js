@@ -90,7 +90,7 @@ export default function Login() {
                         notify("success")
                         setTimeout(() => {
                             console.log("Delayed for 1 second.");
-                            navigate("/dashboard")
+                            navigate("/home")
                         }, "1800")
                     } else {
                         notify("error")

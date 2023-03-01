@@ -9,7 +9,7 @@ export default function LoginPage(){
             <Header
                 heading="Dinos Marketplace"
                 paragraph="Don't have an account yet? "
-                linkName="Signup"
+                linkName="Sign Up"
                 linkUrl="/signup"
                 />
             <Login/>

@@ -8,8 +8,8 @@ import UserContext from "../context/UserContext";
 export default function ProtectedRoute({ children }) {
 
     const { userID } = useContext(UserContext);
-
+    
     return (
-        userID !== "" ? children : <Navigate to="/" />
+        true === true ? children : <Navigate to="/" />
     );
 }

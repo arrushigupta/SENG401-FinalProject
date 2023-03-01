@@ -6,7 +6,7 @@ import ProductModal from './ProductModal';
 
 
 
-export default function Product({ name, description, price}){
+export default function Product({ name, description, price, userID, category}){
 
     const { setLoading } = useContext(LoadingContext);
 
@@ -32,26 +32,25 @@ export default function Product({ name, description, price}){
 
     return(
         <>
-        <div class = " rounded-lg bg-slate-100 hover:bg-red-200 hover:shadow-xl active:bg-red-400 m-4"
+        <div class = " group w-fit h-fit rounded-lg bg-slate-100 hover:bg-red-600 hover:shadow-xl active:bg-red-700 m-4 md:hover:text-neutral-50"
              onClick={loadModal}>
             
-            <div class="max-w-sm rounded overflow-hidden shadow-lg ">
+            <div class="relative max-w-sm rounded overflow-hidden shadow-lg ">
+                <span class="absolute top-1 right-1 inline-block group-hover:bg-red-600 bg-gray-100 opacity-60 group-hover:opacity-100 rounded-full px-3 py-1 mx-2 text-lg font-semibold group-hover:text-gray-100 text-gray-700 mr-2 mb-2">${price}</span>
                 <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains"/>
-                <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">{name}</div>
-                    <p class="text-gray-700 text-base">{description}</p>
-                    <p class="font-bold text-lg mb-2">${price}</p>
+                <div class="px-6 py-4 ">
+                    <div class="font-bold text-xl mb-2">
+                        {name}
+                    </div>
+                    <span class="inline-block group-hover:bg-gray-200 bg-red-500 rounded-full px-3 py-1 mx-2 text-sm font-semibold group-hover:text-gray-700 text-gray-100 mr-2 mb-2">{category}</span>
+                    <p class="text-gray-700 text-base ">{description}</p>
                 </div>
-                <div class="px-6 pt-1 pb-2">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                </div>
+                
             </div>
         </div>
         {showModal ? (
             <>
-                <ProductModal name = {name} description = {description} price = {price} setShowModal = {setShowModal} />
+                <ProductModal category = {category} name = {name} description = {description} price = {price} setShowModal = {setShowModal} />
             </>
       ) : null}
             

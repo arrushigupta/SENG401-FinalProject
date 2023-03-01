@@ -55,14 +55,14 @@ export default function CreateProduct(){
     return(
         <>
 
-        <div class="grid grid-cols-3 gap-4">
+        <div className="grid-cols-3 gap-4 flex flex-col justify-center items-center ">
 
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
 
-            <input label="Name" name="name" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" placeholder='Product Name'/><br />
-            <input label="Price" name="price" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" placeholder='Price'/><br />
-            <input label="Category" name="category" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg " placeholder='Category'/><br />
-            <input label="Description" name="description" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" placeholder='Description'/><br />
+            <input label="Name" name="name" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Product Name'/><br />
+            <input label="Price" name="price" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Price'/><br />
+            <input label="Category" name="category" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Category'/><br />
+            <input label="Description" name="description" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Description'/><br />
             
             
             <FormAction handleSubmit={handleSubmit} text="Submit" />
