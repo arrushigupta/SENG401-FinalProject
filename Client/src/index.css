@@ -14,6 +14,10 @@ body {
   
 }
 
+#navBarColour{
+  background-color: #2a2d35;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

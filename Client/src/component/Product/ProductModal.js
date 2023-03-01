@@ -51,8 +51,8 @@ export default function ProductModal({ name, description, price, setShowModal}){
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl text-red-600 ">
+                <div className="flex items-start bg-red-700 justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl text-neutral-50 ">
                     {name}
                   </h3>
                   <button
@@ -64,7 +64,7 @@ export default function ProductModal({ name, description, price, setShowModal}){
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
+                <div className="relative p-6 flex-auto bg-zinc-300">
                   <img class="object-cover h-60 w-110 rounded shadow" src={img} alt="Sunset in the mountains"/>
                   <div className="flex items-start justify-start p-1 rounded-t">
                     <p className="my-2 text-slate-500 text-lg leading-relaxed">
@@ -93,7 +93,7 @@ export default function ProductModal({ name, description, price, setShowModal}){
                   
                 </div>
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b bg-zinc-700">
                   <input type="text" placeholder="Write a message to seller" class="px-3 py-3 mr-7  placeholder-slate-400 text-slate-600 relative bg-slate-200 rounded text-sm border-0 shadow outline-slate-200 focus:outline-slate-300 focus:ring w-full">
                   </input>
                   <Button onClick={handleClick} label="Message Seller" />
