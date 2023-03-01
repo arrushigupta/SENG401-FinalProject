@@ -26,7 +26,7 @@ function Dashboard() {
     return (<div>
         <NavBar></NavBar>
         
-        <div class= "product-list-dashboard">
+        <div class= "product-list-dashboard flex w-screen">
             <ProductList/>
         </div>
         

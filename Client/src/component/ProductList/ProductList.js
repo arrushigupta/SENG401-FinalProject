@@ -30,7 +30,7 @@ export default function ProductList() {
         <>
             <div className="py-24">            
             
-            <div>
+            <div className = "grid w-screen sm:grid-cols:1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map(product => (
                 <Product key={product._id} {...product} />
             ))}
