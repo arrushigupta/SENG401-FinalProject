@@ -4,11 +4,18 @@ import LoadingContext from "../../context/LoadingContext";
 import img from '../../img/Gorilla.jpg';
 import axios from 'axios';
 import { addMessageRoute } from "../../utils/Routes";
+import Button from '../Additional/Button'
 
 
 export default function ProductModal({ name, description, price, setShowModal}){
     
     const { setLoading } = useContext(LoadingContext);
+
+    const handleClick = () => {
+      setShowModal(false);
+
+      console.log("Sending message, funct not implemented")
+    };
 
     // const handleSendMsg = async (msg) => {
     //   const data = await axios.post(addMessageRoute, {
@@ -45,7 +52,7 @@ export default function ProductModal({ name, description, price, setShowModal}){
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl text-red-400 font-semibold mr-10">
+                  <h3 className="text-3xl text-red-600 ">
                     {name}
                   </h3>
                   <button
@@ -89,18 +96,7 @@ export default function ProductModal({ name, description, price, setShowModal}){
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <input type="text" placeholder="Write a message to seller" class="px-3 py-3 mr-7  placeholder-slate-400 text-slate-600 relative bg-slate-200 rounded text-sm border-0 shadow outline-slate-200 focus:outline-slate-300 focus:ring w-full">
                   </input>
-                  <button
-                    className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => {
-                        setShowModal(false);
-
-                        console.log("Sending message, funct not implemented")
-                    }}
-                  >
-                    Message seller
-                  </button>
-                  
+                  <Button onClick={handleClick} label="Message Seller" />
                 </div>
               </div>
             </div>

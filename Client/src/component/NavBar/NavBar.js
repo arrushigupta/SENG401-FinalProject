@@ -20,7 +20,6 @@ export default function NavBar() {
     }
 
     const handleClick = () => {
-        // console.log('Button clicked!');
         navigate("/")
         
       };

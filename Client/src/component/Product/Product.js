@@ -37,9 +37,9 @@ export default function Product({ name, description, price, userID}){
             
             <div class="max-w-sm rounded overflow-hidden shadow-lg ">
                 <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains"/>
-                <div class="px-6 py-4">
+                <div class="px-6 py-4 ">
                     <div class="font-bold text-xl mb-2">{name}</div>
-                    <p class="text-gray-700 text-base">{description}</p>
+                    <p class="text-gray-700 text-base ">{description}</p>
                     <p class="font-bold text-lg mb-2">${price}</p>
                     <p class="font-bold text-lg mb-2">${userID}</p>
                 </div>
