@@ -12,7 +12,7 @@ function LogOut() {
   }
 
   const handleClickDashboard = async () => {
-    navigate('/dashboard');
+    navigate('/home');
   }
 
   return (

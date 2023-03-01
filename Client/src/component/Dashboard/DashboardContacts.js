@@ -1,113 +1,134 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 // import Logo  from "../../assets/logo.svg"
 import Logo from "../../img/dinosM.png"
-function DashboardContacts({contacts,currentUser,changeChat}) {
-    const[currentUserName,setCurrentUserName] = useState(undefined);
-    const[currentUserImage,setCurrentUserImage] = useState(undefined);
-    const [currentSelected,setCurrentSelected] = useState(undefined);
-    useEffect(()=>
-    { 
-        if(currentUser){
-            setCurrentUserName(currentUser.username);
-            setCurrentUserImage(currentUser.avatarImage);
-            console.log(currentUser.username)
-            console.log(currentUser.avatarImage)
+function DashboardContacts({ contacts, currentUser, changeChat }) {
+  const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [currentUserImage, setCurrentUserImage] = useState(undefined);
+  const [currentSelected, setCurrentSelected] = useState(undefined);
+  const [drawerOpen, setOpenDrawer] = useState(false);
 
-            
-        }
-    },[currentUser]);
-
-    useEffect(()=>
-    { 
-        if(contacts){
-           console.log("received contacts", contacts)
-            
-        }
-    },[contacts]);
+  useEffect(() => {
+    if (currentUser) {
+      setCurrentUserName(currentUser.username);
+      setCurrentUserImage(currentUser.avatarImage);
+      console.log(currentUser.username)
+      console.log(currentUser.avatarImage)
 
 
-    const changeCurrentChat = (index,contact)=>{
-        setCurrentSelected(index);
-        changeChat(contact);
-    };
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (contacts) {
+      console.log("received contacts", contacts)
+
+    }
+  }, [contacts]);
+
+
+  const changeCurrentChat = (index, contact) => {
+    setCurrentSelected(index);
+    changeChat(contact);
+  };
+
+  const handleOpenDrawer = () => {
+    setOpenDrawer(!drawerOpen)
+
+  };
+
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden'
+    }
+    if (!drawerOpen) {
+      document.body.style.overflow = 'unset'
+    }
+  }, [drawerOpen])
+
+
   return (
     <>
-        {
-            currentUserName&&currentUserImage &&(
-
-            <Container>
-            <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h3>Dinos Marketplace</h3>
-          </div>
-          <div className="contacts">
-            {contacts.map((contact, index) => {
-              return (
-                <div
-                  key={contact._id}
-                  className={`contact ${
-                    index === currentSelected ? "selected" : ""
-                  }`}
-                  onClick={() => changeCurrentChat(index, contact)}
-                >
-                  <div className="avatar">
-                    <img
-                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                      alt="avatar"
-                    />
-                  </div>
-                  <div className="username">
-                    <h3>{contact.username}</h3>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="current-user">
-            <div className="avatar">
-              <img
-                src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="avatar"
-              />
+      {
+        currentUserName && currentUserImage && (
+          <div>
+            <div class="text-center absolute mt-20">
+              {<button class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" onClick={handleOpenDrawer}>
+                Show Inbox
+              </button>}
             </div>
-            <div className="username">
-              <h2>{currentUserName}</h2>
+            {drawerOpen && <div
+              className={
+                " fixed min-h-full overflow-y-scroll overflow-hidden z-10 bg-gray-900 bg-opacity-25 inset-0 transform ease-in-out " +
+                (drawerOpen
+                  ? " transition-opacity opacity-100 duration-500 translate-x-0  "
+                  : " transition-all delay-500 opacity-0 translate-x-full  ")
+              }
+            >
+              <section
+                className={
+                  " w-screen  max-w-lg right-0 absolute bg-white h-full min-h-screen shadow-xl delay-400 duration-500 ease-in-out transition-all transform  " +
+                  (drawerOpen ? " translate-x-0 " : " translate-x-full ")
+                }
+              >
+                <header className="p-4 font-bold text-lg absolute mt-20">Inbox</header>
+                <Container>
+                  <div className="contacts">
+                    {contacts.map((contact, index) => {
+                      return (
+                        <div
+                          key={contact._id}
+                          className={`contact ${index === currentSelected ? "selected" : ""
+                            }`}
+                          onClick={() => changeCurrentChat(index, contact)}
+                        >
+                          <div className="avatar">
+                            <img
+                              src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                              alt="avatar"
+                            />
+                          </div>
+                          <div className="username">
+                            <h3>{contact.username}</h3>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </Container>
+              </section>
+              <section
+                className="w-screen h-full cursor-pointer "
+                onClick={() => {
+                  setOpenDrawer(false);
+                }}
+              ></section>
             </div>
+            }
           </div>
-            </Container>
-            )
-        }
+        )
+      }
     </>
   )
 }
 
 const Container = styled.div`
- display: grid;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
-  background-color: #F99417;
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    img {
-      height: 2rem;
-    }
-    h3 {
-      color: white;
-      text-transform: uppercase;
-    }
-  }
+  background-color: #36454F;
+  min-height: 100vh;
+  scroll-behaviour: smooth;
+  
+
   .contacts {
+    margin-top: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: auto;
     gap: 0.8rem;
     &::-webkit-scrollbar {
-      width: 0.2rem;
+      width: 1rem;
       &-thumb {
         background-color: #ffffff39;
         width: 0.1rem;
@@ -115,8 +136,8 @@ const Container = styled.div`
       }
     }
     .contact {
-      background-color: #C21010;
-      min-height: 5rem;
+      background-color: #616161;
+      min-height: 6rem;
       cursor: pointer;
       width: 90%;
       border-radius: 0.2rem;

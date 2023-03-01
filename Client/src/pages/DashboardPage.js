@@ -55,12 +55,15 @@ export default function DashboardPage() {
     return (
         <>
             <NavBar />
-            <DashboardContacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+            
 
             <div >
-                {/* <h1>My username is: {JSON.parse(localStorage.getItem("chat-app-user")).username}</h1>
-            <h1> Home </h1> */}
+                <h1>My username is: {JSON.parse(localStorage.getItem("chat-app-user")).username}</h1>
+            <h1> Home </h1>
+            <DashboardContacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+
                 <Dashboard></Dashboard>
+
 
                 {/* <ProductList />
             <CreateProduct/> */}

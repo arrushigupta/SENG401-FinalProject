@@ -24,7 +24,7 @@ function Dashboard() {
     const { userID } = useContext(UserContext);
 
     return (<div>
-        <NavBar></NavBar>
+        {/* <NavBar></NavBar> */}
         
         <div class= "product-list-dashboard flex w-screen">
             <ProductList/>

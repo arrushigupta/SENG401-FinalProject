@@ -83,7 +83,7 @@ function Contacts({contacts,currentUser,changeChat}) {
 }
 
 const Container = styled.div`
- display: grid;
+  display: grid;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
   background-color: #F99417;
