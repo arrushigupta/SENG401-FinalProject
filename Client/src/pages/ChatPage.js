@@ -9,6 +9,8 @@ import { io } from 'socket.io-client';
 import { allUsersRoute, host } from '../utils/Routes'
 import LogOut from '../component/ChatRoom/LogOut';
 import Map from "../component/Map/Map"
+import NavBar from "../component/NavBar/NavBar"
+
 function ChatPage() {
   const socket = useRef();
   const navigate = useNavigate();
@@ -61,7 +63,9 @@ function ChatPage() {
     }
   }, [currentUser])
 
-  return (<>
+  return (
+  <div>
+    <NavBar />
     <Container>
       <div className='container'>
         <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
@@ -75,7 +79,7 @@ function ChatPage() {
       </div>
 
     </Container>
-  </>
+  </div>
   )
 }
 
@@ -88,12 +92,12 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #FCFFE7;
+  background-color: #9CAAF;
   .container {
     border-radius: 0.4rem;
-    height: 85vh;
+    height: 75vh;
     width: 85vw;
-    background-color: #E64848;
+    background-color: #DC2626;
     display: grid;
     grid-template-columns: 30% 70%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {

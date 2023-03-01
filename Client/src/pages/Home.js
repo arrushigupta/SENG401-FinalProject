@@ -14,7 +14,6 @@ export default function HomePage() {
             <ProductList />
             <CreateProduct/>
             </div>
-            
         </>
     )
 }
