@@ -14,8 +14,6 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
       setCurrentUserImage(currentUser.avatarImage);
       console.log(currentUser.username)
       console.log(currentUser.avatarImage)
-
-
     }
   }, [currentUser]);
 
