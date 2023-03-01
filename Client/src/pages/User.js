@@ -15,9 +15,6 @@ export default function UserPage() {
                 <div  class= "product-list-dashboard">
                     <ProductList />
                 </div>
-               
-                {/* <ProductList /> */}
-                {/* <CreateProduct/> */}
             </div>
         </>
     )

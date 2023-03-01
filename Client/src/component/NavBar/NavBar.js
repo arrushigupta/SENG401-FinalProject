@@ -49,7 +49,6 @@ export default function NavBar() {
                     </ul>
                 </div>
                 <div class="flex md:order-2">
-                    {/* <button type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button> */}
                     <Button onClick={handleClick} label="Sign Out" />
                 </div>
             </div>
