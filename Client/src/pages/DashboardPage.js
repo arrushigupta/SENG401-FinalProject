@@ -56,6 +56,7 @@ export default function DashboardPage() {
         <>
             <NavBar />
             
+            {/* <DashboardContacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} /> */}
 
             <div >
                 <h1>My username is: {JSON.parse(localStorage.getItem("chat-app-user")).username}</h1>
