@@ -92,7 +92,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #9CAAF;
+  background-color: #9CA3AF;
   .container {
     border-radius: 0.4rem;
     height: 75vh;
