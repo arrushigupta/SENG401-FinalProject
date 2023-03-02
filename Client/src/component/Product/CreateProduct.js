@@ -3,6 +3,7 @@ import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
 import FormAction from "../Login/FormAction";
 import "../../App.css";
+import UploadImage from '../Additional/UploadImage';
 
 
 export default function CreateProduct(){
@@ -63,7 +64,7 @@ export default function CreateProduct(){
             <input label="Price" name="price" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Price'/><br />
             <input label="Category" name="category" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Category'/><br />
             <input label="Description" name="description" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Description'/><br />
-            
+            <UploadImage/>
             
             <FormAction handleSubmit={handleSubmit} text="Submit" />
 
