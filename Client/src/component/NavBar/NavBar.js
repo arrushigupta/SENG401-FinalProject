@@ -4,10 +4,11 @@ import { useLocation } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
 import Button from '../Additional/Button'
+import DashboardContacts from '../Dashboard/DashboardContacts';
 
 
 
-export default function NavBar() {
+export default function NavBar({ contacts, currentUser, changeChat }) {
     const navigate = useNavigate();
     const [activeLink, setActiveLink] = useState('');
     const location = useLocation();
@@ -44,15 +45,21 @@ export default function NavBar() {
                         <li>
                             <a href="/chat" className={activeLink === '/chat' ? 'active text-red-700 px-1 py-2 rounded-md text-md font-medium' : 'hover:text-red-700 px-1 py-2 rounded-md text-md font-medium text-white'}>Chats</a>
                         </li>
+                        
                         <li>
                             <a href="/settings" className={activeLink === '/settings' ? 'active text-red-700 px-1 py-2 rounded-md text-md font-medium' : 'hover:text-red-700 px-1 py-2 rounded-md text-md font-medium text-white'}>Settings</a>
                         </li>
+                        
 
                     </ul>
                 </div>
+
                 <div class="flex md:order-2">
+                <DashboardContacts contacts={contacts} currentUser={currentUser} changeChat={changeChat} />
+
                     <Button onClick={handleClick} label="Sign Out" />
                 </div>
+
             </div>
         </nav>
     )
