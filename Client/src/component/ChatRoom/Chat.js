@@ -34,6 +34,8 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
       from: currentUser._id,
       to: currentChat._id,
       message: msg,
+      to_email:currentChat.email,
+      sender: currentUser.username
     });
     socket.current.emit("send-msg", {
       from: currentUser._id,
@@ -75,7 +77,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
             />
           </div>
           <div className='username'>
-            <h3>{currentChat.username}</h3>
+            <h3>{currentChat.username}&nbsp; &nbsp;✉️: {currentChat.email}</h3>
 
           </div>
 
