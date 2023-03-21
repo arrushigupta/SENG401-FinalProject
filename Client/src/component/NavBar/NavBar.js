@@ -1,5 +1,6 @@
 import img from '../../img/dinosM.png';
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
 import Button from '../Additional/Button'
@@ -8,20 +9,21 @@ import Button from '../Additional/Button'
 
 export default function NavBar() {
     const navigate = useNavigate();
+    const [activeLink, setActiveLink] = useState('');
+    const location = useLocation();
 
-    const {userID, setUserID} = useContext(UserContext);
+    React.useEffect(() => {
+        setActiveLink(location.pathname);
+    }, [location]);
 
 
-    const handleNavigateChatRoom = (e) => {
-        
-            console.log("NavBar userID:", userID);
-            navigate("/chat")
-        
-    }
+    const { userID, setUserID } = useContext(UserContext);
+    
 
     const handleClick = () => {
-        navigate("/")
-        
+        // needs to delete sign in token.
+        localStorage.clear();
+        navigate("/");
       };
 
     return (
@@ -31,19 +33,19 @@ export default function NavBar() {
                     <img src={img} class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
                     <span class="text-xl font-semibold whitespace-nowrap  text-neutral-50">Dinos Marketplace</span>
                 </a>
-                <div class="items-center  justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul class="flex flex-row p-4 mt-4 border rounded-2xl space-x-4 ">
                         <li>
-                            <a href="/home" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0  text-neutral-50    ">Home</a>
+                            <a href="/home" className={activeLink === '/home' ? 'active text-red-700 px-1 py-2 rounded-md text-md font-medium' : 'hover:text-red-700 px-1 py-2 rounded-md text-md font-medium text-white'}>Home</a>
                         </li>
                         <li>
-                            <a href="/user" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0  text-neutral-50  ">User</a>
+                            <a href="/user" className={activeLink === '/user' ? 'active text-red-700 px-1 py-2 rounded-md text-md font-medium' : 'hover:text-red-700 px-1 py-2 rounded-md text-md font-medium text-white'}>User</a>
                         </li>
                         <li>
-                            <button  onClick={handleNavigateChatRoom} href="/chat" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0  text-neutral-50  ">Chats</button>
+                            <a href="/chat" className={activeLink === '/chat' ? 'active text-red-700 px-1 py-2 rounded-md text-md font-medium' : 'hover:text-red-700 px-1 py-2 rounded-md text-md font-medium text-white'}>Chats</a>
                         </li>
                         <li>
-                            <a href="/settings" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0  text-neutral-50  ">Settings</a>
+                            <a href="/settings" className={activeLink === '/settings' ? 'active text-red-700 px-1 py-2 rounded-md text-md font-medium' : 'hover:text-red-700 px-1 py-2 rounded-md text-md font-medium text-white'}>Settings</a>
                         </li>
 
                     </ul>

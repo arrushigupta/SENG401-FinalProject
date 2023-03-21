@@ -1,15 +1,13 @@
 // Used From https://dev.to/olumidesamuel_/implementing-protected-route-and-authentication-in-react-js-3cl4
 
-import React, { useContext, Component } from "react";
-import { Navigate, Route } from "react-router-dom";
-import UserContext from "../context/UserContext";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 
 export default function ProtectedRoute({ children }) {
 
-    const { userID } = useContext(UserContext);
     
     return (
-        true === true ? children : <Navigate to="/" />
+        localStorage.getItem("chat-app-user") !== null ? children : <Navigate to="/" />
     );
 }
