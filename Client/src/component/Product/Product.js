@@ -64,7 +64,7 @@ export default function Product({ name, description, price, userID, category, im
         </div>
         {showModal ? (
             <>
-                <ProductModal userID={userID} category = {category} name = {name} description = {description} price = {price} setShowModal = {setShowModal} images = {url}  />
+                <ProductModal userID={userID} category = {category} name = {name} description = {description} price = {price} setShowModal = {setShowModal} images = {url} />
             </>
       ) : null}
             

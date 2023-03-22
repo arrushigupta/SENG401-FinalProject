@@ -43,7 +43,7 @@ export default function CreateProduct(){
         let imageArr = [];
         for (let i = 0; i < selectedImages[0].length; i++){
             console.log(selectedImages[0][i]);
-            // alert("h")
+            alert("h")
 
             // Read the file as a data URL
             const reader = new FileReader();
@@ -98,7 +98,7 @@ export default function CreateProduct(){
 
         // alert(updatedFormValues["images"])
         new Promise(r => setTimeout(r, 20000));
-        // alert(formValues.images)
+        
         DINOSPost("http://localhost:4000/api/postProduct", setLoading,  updatedFormValues).then((response) => {
             // alert(updatedFormValues["images"][0])
             // alert("Hey")
@@ -124,7 +124,7 @@ export default function CreateProduct(){
                     <input label="Price" name="price" required type='number' step='any' onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Price' /><br />
                     <input label="Category" name="category" onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Category' /><br />
                     <input label="Description" name="description" required onChange={handleInputUpdate} class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg text-center" placeholder='Description' /><br />
-                    <UploadImage inputChange = {handleInputImages}/>
+                    <UploadImage />
 
                     <FormAction handleSubmit={handleSubmit} text="Submit" />
 
