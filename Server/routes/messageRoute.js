@@ -1,68 +1,62 @@
 const router = require("express").Router();
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const messageModel = require("../models/message_model");
-const User= require('../models/user_model')
+const User = require("../models/user_model");
 
 router.post("/getmsg", async (req, res, next) => {
-    try {
-        const { from, to } = req.body;
-        const messages = await messageModel.find({
-            users: {
-                $all: [from, to],
-            },
-
-        }).sort({ updatedAt: 1 });
-        const projectmessages = messages.map((msg) => {
-            return {
-                fromSelf: msg.sender.toString() === from,
-                message: msg.message.text,
-            }
-        });
-        return res.json(projectmessages);
-
-    } catch (ex) {
-        next(ex);
-    }
-
+  try {
+    const { from, to } = req.body;
+    const messages = await messageModel
+      .find({
+        users: {
+          $all: [from, to],
+        },
+      })
+      .sort({ updatedAt: 1 });
+    const projectmessages = messages.map((msg) => {
+      return {
+        fromSelf: msg.sender.toString() === from,
+        message: msg.message.text,
+      };
+    });
+    return res.json(projectmessages);
+  } catch (ex) {
+    next(ex);
+  }
 });
 router.post("/addmsg", async (req, res, next) => {
-    try {
-        const { from, to, message, to_email, sender } = req.body;
-        const data = await messageModel.create({
-            message:
-                { text: message }
-            ,
-            users: [from, to],
-            sender: from,
-        });
-        if (data) {
-            const msg = {
-                to: to_email, // Change to your recipient
-                from: 'dinos.marketplace.seng401@gmail.com', // Change to your verified sender
-                subject: 'New Message from DinosMarketplace',
-                text: `Hey, you just got a new message from ${sender}: ${message}`,
-                html: `<p>Hey, Welcome to DinosMarketplace. </p>
+  try {
+    const { from, to, message, to_email, sender } = req.body;
+    const data = await messageModel.create({
+      message: { text: message },
+      users: [from, to],
+      sender: from,
+    });
+    if (data) {
+      const msg = {
+        to: to_email, // Change to your recipient
+        from: "dinos.marketplace.seng401@gmail.com", // Change to your verified sender
+        subject: "New Message from DinosMarketplace",
+        text: `Hey, you just got a new message from ${sender}: ${message}`,
+        html: `<p>Hey, Welcome to DinosMarketplace. </p>
                 <p>You just got a new message from ${sender}: ${message}</p>`,
-              }
-              sgMail
-                .send(msg)
-                .then(() => {
-                  console.log('Email sent to ', msg.to)
-                })
-                .catch((error) => {
-                  console.error(error)
-                })
-            return res.json({ msg: "Message added Successfully" });
-        }
-        else {
-            return res.json({ msg: "Failed add message onto database" });
-        }
+      };
+      sgMail
+        .send(msg)
+        .then(() => {
+          console.log("Email sent to ", msg.to);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      return res.json({ msg: "Message added Successfully" });
+    } else {
+      return res.json({ msg: "Failed add message onto database" });
     }
-    catch (ex) {
-        next(ex)
-    }
-
+  } catch (ex) {
+    next(ex);
+  }
 });
 
 module.exports = router;
