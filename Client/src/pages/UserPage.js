@@ -3,6 +3,7 @@ import ProductList from "../component/ProductList/ProductList"
 import CreateProduct from "../component/Product/CreateProduct"
 
 export default function UserPage() {
+
     return (
         <>
             <NavBar />
@@ -13,7 +14,7 @@ export default function UserPage() {
                     <CreateProduct/>
                 </div>
                 <div  class= "product-list-dashboard">
-                    <ProductList />
+                    <ProductList chooseMessage={1}/>
                 </div>
             </div>
         </>

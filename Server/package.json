@@ -1,7 +1,6 @@
 {
   "name": "dinos_marketplace_server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,5 +18,8 @@
     "mongoose": "^6.9.1",
     "nodemon": "^2.0.20",
     "socket.io": "^4.6.0"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
 }
