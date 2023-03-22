@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // import Logo  from "../../assets/logo.svg"
 import Logo from "../../img/dinosM.png"
 import Button from '../Additional/Button'
+import { useNavigate } from "react-router-dom";
 
 
 function DashboardContacts({ contacts, currentUser, changeChat }) {
@@ -10,6 +11,8 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
   const [drawerOpen, setOpenDrawer] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (currentUser) {
@@ -31,7 +34,14 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
+    navigate("/chat", {state:{currentSelected:index}});
+
   };
+
+  // const handleClick = () => {
+  //   // needs to delete sign in token.
+  //   navigate("/chat");
+  // };
 
   const handleOpenDrawer = () => {
     setOpenDrawer(!drawerOpen)
@@ -53,7 +63,7 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
       {
         currentUserName && currentUserImage && (
           <div>
-            <div class="text-center absolute mt-20">
+            <div class="text-center mr-4">
               {/* {<button class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" onClick={handleOpenDrawer}>
                 Show Inbox
               </button>} */}

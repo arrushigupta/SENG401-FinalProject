@@ -10,9 +10,11 @@ import { allUsersRoute, host } from '../utils/Routes'
 import LogOut from '../component/ChatRoom/LogOut';
 import Map from "../component/Map/Map"
 import NavBar from "../component/NavBar/NavBar"
+import { useLocation, /* other hooks */ } from 'react-router-dom';
 
-function ChatPage() {
+function ChatPage(props) {
   const socket = useRef();
+  const location = useLocation();
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(undefined);
   const [contacts, setContacts] = useState([]);
@@ -28,7 +30,7 @@ function ChatPage() {
       }
       else {
         setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user"))); //user info, id, username, email
-        console.log(await JSON.parse(localStorage.getItem("chat-app-user")))
+        // console.log(await JSON.parse(localStorage.getItem("chat-app-user")))
       }
     }
     fetchData();
@@ -39,8 +41,8 @@ function ChatPage() {
       if (currentUser) {
         if (currentUser.isAvatarImageSet) {
           const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-          console.log("User data", currentUser)
-          console.log("Contact data for all users", data)
+          // console.log("User data", currentUser)
+          // console.log("Contact data for all users", data)
 
           setContacts(data.data);
         } else {
@@ -49,7 +51,18 @@ function ChatPage() {
       }
     }
     fetchData();
+    
   }, [currentUser]);
+
+
+  useEffect(() => {
+    if (contacts === [])
+      return
+    if (location && location.state && location.state.currentSelected !== undefined) {
+      setCurrentChat(contacts[location.state.currentSelected])
+      handleChatChange(contacts[location.state.currentSelected])
+    }
+  }, [location, contacts]);
 
   const handleChatChange = (chat) => {
     setCurrentChat(chat)
@@ -64,22 +77,22 @@ function ChatPage() {
   }, [currentUser])
 
   return (
-  <div>
-    <NavBar />
-    <Container>
-      <div className='container'>
-        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+    <div>
+      <NavBar />
+      <Container>
+        <div className='container'>
+          <Contacts currentChat={currentChat} contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
 
 
-        {currentChat === undefined ? <Welcome currentUser={currentUser} /> :
-          <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
-        {/* <div>
+          {currentChat === undefined ? <Welcome currentUser={currentUser} /> :
+            <Chat currentChat={currentChat} currentUser={currentUser} socket={socket} />}
+          {/* <div>
           <Map setSelectedLocation={setSelectedLocation} />
         </div> */}
-      </div>
+        </div>
 
-    </Container>
-  </div>
+      </Container>
+    </div>
   )
 }
 
