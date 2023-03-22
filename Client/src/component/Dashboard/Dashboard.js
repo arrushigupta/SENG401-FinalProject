@@ -8,14 +8,12 @@ import UserContext from "../../context/UserContext";
 
 function Dashboard() {
 
-    const { userID } = useContext(UserContext);
-
     return (<div>
-        
-        <div class= "product-list-dashboard flex w-screen">
-            <ProductList chooseMessage={0}/>
+
+        <div class="product-list-dashboard flex w-screen py-20">
+            <ProductList chooseMessage={0} />
         </div>
-        
+
     </div>);
 }
 

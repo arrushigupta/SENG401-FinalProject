@@ -12,15 +12,15 @@ export default function ProductList() {
     // Most likely you will need a handleinput and not useffect, and somehow query based on that parameter
 
     useEffect(() => {
-        
+
         DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
         setLoading(false);
 
-        console.log( JSON.parse(localStorage.getItem("chat-app-user")));
+        console.log(JSON.parse(localStorage.getItem("chat-app-user")));
         console.log(JSON.parse(localStorage.getItem("chat-app-user")).username);
         console.log(JSON.parse(localStorage.getItem("chat-app-user"))._id);
 
-    },[]);
+    }, []);
 
     // Product expects an object that can directly be rendered
     // You would need to do a loop that queries for all objects necessary and then pass in
@@ -28,13 +28,13 @@ export default function ProductList() {
 
     return (
         <>
-            <div className="py-24">            
-            
-            <div className = "grid w-screen sm:grid-cols:1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map(product => (
-                <Product key={product._id} {...product} />
-            ))}
-            </div>
+            <div className="">
+
+                <div className="grid w-screen sm:grid-cols:1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {products.map(product => (
+                        <Product key={product._id} {...product} />
+                    ))}
+                </div>
 
             </div>
         </>
