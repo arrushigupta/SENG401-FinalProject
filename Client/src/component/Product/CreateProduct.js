@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-export default function CreateProduct(){
+export default function CreateProduct({ closeModal, updateProductState}){
 
     const { setLoading } = useContext(LoadingContext);
     const [images, setImages] = useState([]);
@@ -112,13 +112,15 @@ export default function CreateProduct(){
                 date: new Date(),
             });
         });
+        closeModal();
+        updateProductState();
     }
 
     return (
         <>
 
             <div className="grid-cols-3 gap-4 flex flex-col justify-center items-center ">
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <h1 className="text-2xl block mb-2 font-bold text-red-700"> Create New Product: </h1>
                     <div className="mb-4">
                         <label htmlFor="productName" className="block mb-2 font-bold text-gray-700">Product Name</label>
