@@ -44,7 +44,7 @@ export default function CreateProduct(){
         let imageArr = [];
         for (let i = 0; i < selectedImages[0].length; i++){
             console.log(selectedImages[0][i]);
-            // alert("h")
+            alert("h")
 
             // Read the file as a data URL
             const reader = new FileReader();
@@ -98,7 +98,7 @@ export default function CreateProduct(){
 
         // alert(updatedFormValues["images"])
         new Promise(r => setTimeout(r, 20000));
-        // alert(formValues.images)
+        
         DINOSPost("http://localhost:4000/api/postProduct", setLoading,  updatedFormValues).then((response) => {
             // alert(updatedFormValues["images"][0])
             // alert("Hey")

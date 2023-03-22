@@ -3,15 +3,24 @@ import NavBar from "../component/NavBar/NavBar"
 import ProductList from "../component/ProductList/ProductList"
 import CreateProduct from "../component/Product/CreateProduct"
 import Footer from '../component/Additional/Footer'
+import React from 'react'
 
 export default function HomePage() {
+
+    const [message, setMessage] = React.useState("Hello World");
+    const chooseMessage = (message) => {
+        setMessage(message);
+    };
+
     return (
         <>
-            <NavBar />
+            {/* <NavBar /> */}
+
             <div class="py-24">
-            {/* <h1>My username is: {JSON.parse(localStorage.getItem("chat-app-user")).username}</h1> */}
             <h1> Home </h1>
-            <ProductList />
+            <h1>message</h1>
+            <ProductList chooseMessage={chooseMessage}/>
+
             <CreateProduct/>
             </div>
         </>

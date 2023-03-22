@@ -12,7 +12,7 @@ import LoadingContext from "./context/LoadingContext";
 import UserContext from "./context/UserContext";
 import ProtectedRoute from './component/ProtectedRoute';
 import SettingsPage from './pages/Settings';
-import UserPage from './pages/User';
+import UserPage from './pages/UserPage';
 import ChatPage from './pages/ChatPage';
 import DashboardPage from './pages/DashboardPage';
 
