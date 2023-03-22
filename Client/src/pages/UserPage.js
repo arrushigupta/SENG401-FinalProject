@@ -3,17 +3,13 @@ import ProductList from "../component/ProductList/ProductList"
 
 import Dashboard from "../component/Dashboard/Dashboard"
 import CreateProduct from "../component/Product/CreateProduct"
-<<<<<<< Updated upstream
 import { IoIosAdd } from 'react-icons/io';
-import React, { useState } from 'react';
 import Modal from "../component/Product/CreateProductModal";
-=======
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import DashboardContacts from '../component/Dashboard/DashboardContacts';
 import axios from 'axios';
 import { allUsersRoute } from '../utils/Routes'
->>>>>>> Stashed changes
 
 export default function UserPage() {
     
