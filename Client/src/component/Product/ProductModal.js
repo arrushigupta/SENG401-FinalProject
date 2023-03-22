@@ -8,7 +8,7 @@ import Button from '../Additional/Button'
 import { io } from 'socket.io-client';
 
 
-export default function ProductModal({ userID, name, description, price, category, setShowModal }) {
+export default function ProductModal({ userID, name, description, price, category, setShowModal, images }) {
 
   const { setLoading } = useContext(LoadingContext);
   const [message, setMessage] = useState('');
@@ -65,7 +65,7 @@ export default function ProductModal({ userID, name, description, price, categor
             {/*body*/}
             <div className="relative p-6 flex justify-center bg-zinc-300">
               <div className="w-fit">
-                <img class="object-cover h-60 w-110 rounded shadow" src={img} alt="Sunset in the mountains" />
+                <img class="object-cover h-60 w-110 rounded shadow" src={images} alt="Sunset in the mountains" />
                 <div className="flex items-start justify-start p-1 rounded-t">
                   <p className="my-2 text-slate-500 text-lg leading-relaxed">
                     Seller
