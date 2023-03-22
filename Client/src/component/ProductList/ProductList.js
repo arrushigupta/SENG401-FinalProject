@@ -3,7 +3,7 @@ import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
 import Product from "../Product/Product"
 
-export default function ProductList({ call }) {
+export default function ProductList({ chooseMessage }) {
 
     const { setLoading } = useContext(LoadingContext);
     const [products, setProducts] = useState([]);
@@ -15,11 +15,11 @@ export default function ProductList({ call }) {
 
         var apiString = "http://localhost:4000/api/getSpecificProducts/userID/" + JSON.parse(localStorage.getItem("chat-app-user"))._id;
 
-        // console.log("Log here: " + call);
+        console.log("Message " + chooseMessage);
 
-        if(call === 0)
-            {DINOSGet(apiString, setLoading, setProducts);} // type/value
-        else 
+        if(chooseMessage === 1)
+            DINOSGet(apiString, setLoading, setProducts);
+        else if(chooseMessage === 0)
             DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
         
         setLoading(false);

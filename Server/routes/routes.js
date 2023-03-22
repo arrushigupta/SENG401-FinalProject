@@ -187,7 +187,7 @@ router.get('/getSpecificProducts/:type/:value', (req, res) => {
   const type = req.params.type;
   const value = req.params.value;
   const filter = {};
-  filter[type] = value;
+  filter[type] = value.toString();
 
   ProductModel.find(filter, (err, products) => {
     if (err) {

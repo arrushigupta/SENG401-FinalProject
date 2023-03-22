@@ -4,8 +4,6 @@ import CreateProduct from "../component/Product/CreateProduct"
 
 export default function UserPage() {
 
-    const callStatus = "awsome";
-
     return (
         <>
             <NavBar />
@@ -16,7 +14,7 @@ export default function UserPage() {
                     <CreateProduct/>
                 </div>
                 <div  class= "product-list-dashboard">
-                    <ProductList callStatus={callStatus}/>
+                    <ProductList chooseMessage={1}/>
                 </div>
             </div>
         </>

@@ -6,28 +6,14 @@ import Contacts from "../ChatRoom/Contacts";
 import UserContext from "../../context/UserContext";
 
 
-function Posts() {
-
-    return (
-        <div>
-
-        </div>
-        
-    );
-}
-
-
 function Dashboard() {
-
-    
 
     const { userID } = useContext(UserContext);
 
     return (<div>
-        {/* <NavBar></NavBar> */}
         
         <div class= "product-list-dashboard flex w-screen">
-            <ProductList/>
+            <ProductList chooseMessage={0}/>
         </div>
         
     </div>);
