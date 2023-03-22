@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 const router = express.Router()
 const auth = require("../auth");
+const bodyParser = require('body-parser');
 
 module.exports = router;
 
@@ -101,7 +102,7 @@ router.post("/login", (req, res) => {
 
 
 router.post('/register', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   // need to check if user with same email or username exists in the database
   const emailCheck = await UserModel.findOne({ email: req.body.email })
@@ -131,8 +132,14 @@ router.post('/register', async (req, res) => {
 // The following are apis for products, should we put them in their page to have microservice architecture? --------------
 router.post('/postProduct', async (req, res) => {
   
-  console.log(req.body);
-  
+  //console.log(req.body);
+
+    console.log("images Server");
+    // console.log(req.body);
+    let i= 0; 
+    req.body.images.forEach((image)=>{
+      console.log(i++);
+    });
     const product = new ProductModel({
       userID: req.body.userID,
       name: req.body.name,
@@ -140,6 +147,8 @@ router.post('/postProduct', async (req, res) => {
       category: req.body.category,
       description: req.body.description,
       date: req.body.date,
+      images: req.body.images
+
     })
 
     try {
@@ -156,14 +165,14 @@ router.post('/postProduct', async (req, res) => {
 // return all products by the date they were created
 router.get('/getAllProducts', async (req, res) => {
   
-  console.log(req.body);
+  //console.log(req.body);
   
   ProductModel.find({}).sort({_id: -1}).exec((error, products) => {
     if (error) {
       console.log('Error retrieving products:', error);
       return res.status(400).json({ message: error.message, status: "error" })
     }
-    console.log('Retrieved products:', products);
+    //console.log('Retrieved products:', products);
     return res.json(products);
     
   });
