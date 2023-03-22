@@ -1,0 +1,25 @@
+{
+  "name": "seng401",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arrushigupta/SENG401-FinalProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arrushigupta/SENG401-FinalProject/issues"
+  },
+  "homepage": "https://github.com/arrushigupta/SENG401-FinalProject#readme",
+  "dependencies": {
+    "-": "^0.0.1",
+    "y": "^0.3.2"
+  },
+  "devDependencies": {},
+  "description": ""
+}
