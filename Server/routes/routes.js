@@ -134,7 +134,7 @@ router.post('/postProduct', async (req, res) => {
   
   //console.log(req.body);
 
-    console.log("images Server");
+    console.log(req.body);
     // console.log(req.body);
     let i= 0; 
     req.body.images.forEach((image)=>{
