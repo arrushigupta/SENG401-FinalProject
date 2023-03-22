@@ -12,11 +12,19 @@ function Contacts({contacts,currentUser,changeChat}) {
             setCurrentUserName(currentUser.username);
             setCurrentUserImage(currentUser.avatarImage);
             console.log(currentUser.username)
-            console.log(currentUser.avatarImage)
+            // console.log(currentUser.avatarImage)
 
             
         }
     },[currentUser]);
+
+    useEffect(()=>
+    { 
+        if(currentSelected){
+          console.log("Changed current selected user")
+
+        }
+    },[currentSelected]);
 
     useEffect(()=>
     { 

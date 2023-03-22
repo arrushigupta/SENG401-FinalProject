@@ -1,5 +1,6 @@
 const router = require("express").Router();
-
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const messageModel = require("../models/message_model");
 const User= require('../models/user_model')
 
@@ -27,7 +28,7 @@ router.post("/getmsg", async (req, res, next) => {
 });
 router.post("/addmsg", async (req, res, next) => {
     try {
-        const { from, to, message } = req.body;
+        const { from, to, message, to_email, sender } = req.body;
         const data = await messageModel.create({
             message:
                 { text: message }
@@ -36,6 +37,22 @@ router.post("/addmsg", async (req, res, next) => {
             sender: from,
         });
         if (data) {
+            const msg = {
+                to: to_email, // Change to your recipient
+                from: 'dinos.marketplace.seng401@gmail.com', // Change to your verified sender
+                subject: 'New Message from DinosMarketplace',
+                text: `Hey, you just got a new message from ${sender}: ${message}`,
+                html: `<p>Hey, Welcome to DinosMarketplace. </p>
+                <p>You just got a new message from ${sender}: ${message}</p>`,
+              }
+              sgMail
+                .send(msg)
+                .then(() => {
+                  console.log('Email sent to ', msg.to)
+                })
+                .catch((error) => {
+                  console.error(error)
+                })
             return res.json({ msg: "Message added Successfully" });
         }
         else {

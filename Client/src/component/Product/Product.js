@@ -6,12 +6,26 @@ import ProductModal from './ProductModal';
 
 
 
-export default function Product({ name, description, price, userID, category}){
+export default function Product({ name, description, price, userID, category, images}){
 
+    let url = "https://v1.tailwindcss.com/img/card-top.jpg"
     const { setLoading } = useContext(LoadingContext);
 
-    
+    console.log(images);
 
+
+    if (images.length > 0){
+        // const base64Data = images[0].replace(/^data:image\/\w+;base64,/, "");
+        console.log(images[0].substring(0, 100))    
+        // // Convert the base64 string to a buffer
+        // const buffer = Buffer.from(base64Data, 'base64');
+
+        // const blob = new Blob([buffer], { type: 'image/png' });
+        url = "data:image/png;base64," + images[0];
+    }
+    
+    // Write the buffer to a file
+    // fs.writeFileSync('image.png', buffer);
     // possibly will add an array of tags
 
     //product use state for testing
@@ -37,7 +51,7 @@ export default function Product({ name, description, price, userID, category}){
             
             <div class="relative max-w-sm rounded overflow-hidden shadow-lg ">
                 <span class="absolute top-1 right-1 inline-block group-hover:bg-red-600 bg-gray-100 opacity-60 group-hover:opacity-100 rounded-full px-3 py-1 mx-2 text-lg font-semibold group-hover:text-gray-100 text-gray-700 mr-2 mb-2">${price}</span>
-                <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains"/>
+                <img class="w-full" src={url} alt="Sunset in the mountains"/>
                 <div class="px-6 py-4 ">
                     <div class="font-bold text-xl mb-2">
                         {name}

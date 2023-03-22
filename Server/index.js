@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const socket = require("socket.io");
-
+const bodyParser = require("body-parser");
 // connection to MongoDB database
 const mongoString = process.env.DATABASE_URL
 
@@ -22,7 +22,7 @@ database.once('connected', () => {
 // creates express app
 
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors())
 
 const routes = require('./routes/routes');
