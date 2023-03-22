@@ -3,7 +3,7 @@ import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
 import Product from "../Product/Product"
 
-export default function ProductList() {
+export default function ProductList({ chooseMessage }) {
 
     const { setLoading } = useContext(LoadingContext);
     const [products, setProducts] = useState([]);
@@ -12,14 +12,14 @@ export default function ProductList() {
     // Most likely you will need a handleinput and not useffect, and somehow query based on that parameter
 
     useEffect(() => {
+        var apiString = "http://localhost:4000/api/getSpecificProducts/userID/" + JSON.parse(localStorage.getItem("chat-app-user"))._id;
+        console.log("Message " + chooseMessage);
 
-        DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
+        if (chooseMessage === 1)
+            DINOSGet(apiString, setLoading, setProducts);
+        else if (chooseMessage === 0)
+            DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
         setLoading(false);
-
-        console.log(JSON.parse(localStorage.getItem("chat-app-user")));
-        console.log(JSON.parse(localStorage.getItem("chat-app-user")).username);
-        console.log(JSON.parse(localStorage.getItem("chat-app-user"))._id);
-
     }, []);
 
     // Product expects an object that can directly be rendered
