@@ -51,7 +51,7 @@ export default function Product({ name, description, price, userID, category, im
             
             <div class="relative max-w-sm rounded overflow-hidden shadow-lg ">
                 <span class="absolute top-1 right-1 inline-block group-hover:bg-red-600 bg-gray-100 opacity-60 group-hover:opacity-100 rounded-full px-3 py-1 mx-2 text-lg font-semibold group-hover:text-gray-100 text-gray-700 mr-2 mb-2">${price}</span>
-                <img class="w-96 h-72" src={url} alt="Sunset in the mountains" width={"15px"} height/>
+                <img class="object-cover w-96 h-72" src={url} alt="Sunset in the mountains" width={"15px"} height/>
                 <div class="px-6 py-4 ">
                     <div class="font-bold text-xl mb-2">
                         {name}
