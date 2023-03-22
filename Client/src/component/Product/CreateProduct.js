@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-export default function CreateProduct({ closeModal}){
+export default function CreateProduct({ closeModal, updateProductState}){
 
     const { setLoading } = useContext(LoadingContext);
     const [images, setImages] = useState([]);
@@ -113,6 +113,7 @@ export default function CreateProduct({ closeModal}){
             });
         });
         closeModal();
+        updateProductState();
     }
 
     return (

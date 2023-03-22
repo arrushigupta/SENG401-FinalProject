@@ -8,6 +8,11 @@ import Modal from "../component/Product/CreateProductModal";
 export default function UserPage() {
 
     const [isOpen, setIsOpen] = useState(false);
+    const [productState, setProductState] = useState(0);
+
+    const updateProductState = () => { 
+        setProductState(productState + 1);
+    }
 
     const handleOpenModal = () => {
         setIsOpen(true);
@@ -31,10 +36,10 @@ export default function UserPage() {
                     <IoIosAdd className="h-8 w-8" />
                 </button>
                 <Modal isOpen={isOpen} close={handleCloseModal}>
-                    <CreateProduct closeModal={handleCloseModal} />
+                    <CreateProduct closeModal={handleCloseModal} updateProductState={ updateProductState} />
                 </Modal>
                 <div  className= "product-list-dashboard">
-                    <ProductList chooseMessage={1}/>
+                    <ProductList chooseMessage={1} productState={productState} />
                 </div>
             </div>
         </>

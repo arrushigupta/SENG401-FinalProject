@@ -3,7 +3,7 @@ import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
 import Product from "../Product/Product"
 
-export default function ProductList({ chooseMessage }) {
+export default function ProductList({ chooseMessage, productState}) {
 
     const { setLoading } = useContext(LoadingContext);
     const [products, setProducts] = useState([]);
@@ -20,7 +20,8 @@ export default function ProductList({ chooseMessage }) {
         else if (chooseMessage === 0)
             DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
         setLoading(false);
-    }, []);
+        console.log(">>>" + productState);
+    }, [productState]);
 
     // Product expects an object that can directly be rendered
     // You would need to do a loop that queries for all objects necessary and then pass in
@@ -29,7 +30,6 @@ export default function ProductList({ chooseMessage }) {
     return (
         <>
             <div className="">
-
                 <div className="grid w-screen sm:grid-cols:1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {products.map(product => (
                         <Product key={product._id} {...product} />
