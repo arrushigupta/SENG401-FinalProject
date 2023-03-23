@@ -58,8 +58,17 @@ export default function ProductModal({ userID, name, description, price, categor
 
   const { setLoading } = useContext(LoadingContext);
   const [message, setMessage] = useState('');
+  const [seller, setSeller] = useState(undefined);
   const socket = useRef();
-
+  useEffect(() => {
+    DINOSGet("http://localhost:4000/api/specificUser/" +userID, setLoading, setSeller);
+  }, []);
+  useEffect(() => {
+    if (seller !==undefined){
+      console.log(seller);
+    }
+  }, [seller]);
+  
   const handleChange = (event) => {
     setMessage(event.target.value);
     console.log(message)
@@ -157,9 +166,9 @@ export default function ProductModal({ userID, name, description, price, categor
                   <p className="my-2 text-slate-500 text-lg leading-relaxed">
                     Seller
                   </p>
-                  <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">
-                    Your mother
-                  </p>
+                  
+                  {seller!==undefined && seller[0].username!==undefined && <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">{seller[0].username}</p>}
+                  {seller===undefined &&  <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">placeholder</p>}
                 </div>
                 <div className="flex items-start justify-start p-1 rounded-t">
                   <p className="my-2 text-slate-500 text-lg leading-relaxed">
