@@ -37,6 +37,8 @@ export default function ProductList({ chooseMessage, productState}) {
                 </div>
 
             </div>
+
+            
         </>
     )
 }
