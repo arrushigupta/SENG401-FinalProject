@@ -293,3 +293,19 @@ router.get("/allusers/:id", async (req, res, next) => {
 
   }
 })
+
+router.get("/specificUser/:id", async (req, res, next) => {
+  try {
+      const users = await UserModel.find({ _id: req.params.id  }).select([
+          "username",
+          "avatarImage",
+          "email",
+          "_id"
+      ]);
+      return res.json(users);
+  } catch (ex) {
+      next(ex);
+
+  }
+})
+
