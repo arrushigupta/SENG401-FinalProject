@@ -23,7 +23,7 @@ export default function NavBar({ contacts, currentUser, changeChat }) {
       };
 
     return (
-        <nav id= "navbar" className="bg-white px-2 sm:px-4 py-2.5  fixed w-full z-20 top-0 left-0 border-b border-gray-200 flex justify-between items-center">
+        <nav id= "navbar" className=" px-2 sm:px-4 py-2.5  fixed w-full z-20 top-0 left-0 border-b border-gray-200 flex justify-between items-center">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <a href="/home" className="flex items-center">
                     <img src={img} className="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
