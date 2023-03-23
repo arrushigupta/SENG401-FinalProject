@@ -9,7 +9,7 @@ import { addMessageRoute, getAllMessagesRoute } from "../../utils/Routes";
 import { v4 as uuidv4 } from 'uuid';
 
 
-export default function ChatContainer({ currentChat, currentUser, socket }) {
+export default function ChatContainer({ currentChat, setCurrentChat, currentUser, socket }) {
 
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState([]);
@@ -83,7 +83,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
           </div>
 
         </div>
-        <LogOut />
+        <LogOut setCurrentChat={setCurrentChat}/>
       </div>
       <div className='chat-messages' >
 

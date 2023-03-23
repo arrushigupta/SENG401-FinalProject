@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+
 import { BiPowerOff } from "react-icons/bi";
 import { BiHomeAlt } from "react-icons/bi";
+import { IoMdClose } from "react-icons/io";
 
-function LogOut() {
+
+
+function LogOut({setCurrentChat}) {
   const navigate = useNavigate();
+
   const handleClickLogOut = async () => {
     localStorage.clear();
     navigate('/');
@@ -15,8 +20,15 @@ function LogOut() {
     navigate('/home');
   }
 
+  const handleCloseChat = async () => {
+    setCurrentChat(undefined)
+  }
+
   return (
     <div>
+      <Button onClick={handleCloseChat} >
+        <IoMdClose />
+      </Button>
       <Button onClick={handleClickLogOut} >
         <BiPowerOff />
       </Button>
