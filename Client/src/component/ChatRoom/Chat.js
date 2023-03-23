@@ -23,10 +23,11 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
       );
       setMessages(response.data);
-
+      console.log("MESSAGES", response.data)
 
     }
     fetchData();
+    
   }, [currentChat]);
 
   const handleSendMsg = async (msg) => {

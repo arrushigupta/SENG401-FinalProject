@@ -1,5 +1,6 @@
 import Dashboard from "../component/Dashboard/Dashboard"
 import NavBar from "../component/NavBar/NavBar"
+import SearchBox from "../component/SearchBox/SearchBox"
 import CreateProduct from "../component/Product/CreateProduct"
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +57,7 @@ export default function DashboardPage() {
         <>
             
             <NavBar contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
-
+            
             <div >
                 <h1>My username is: {JSON.parse(localStorage.getItem("chat-app-user")).username}</h1>
             <h1> Home </h1>
@@ -67,6 +68,7 @@ export default function DashboardPage() {
 
                 {/* <ProductList />
             <CreateProduct/> */}
+            
             </div>
 
         </>

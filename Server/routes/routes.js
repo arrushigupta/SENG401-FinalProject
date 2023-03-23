@@ -129,6 +129,45 @@ router.post('/register', async (req, res) => {
   });
 })
 
+router.post('/updateInfo/:userID', async (req, res) => {
+  // try {
+  //   const editInfo = await UserModel.find(req.params.userID);
+
+  //   if (!editInfo) {
+  //     return res.status(404).json({ message: 'userID not found' });
+  //   }
+
+  //   res.json({ message: 'userID found' });
+  // } catch (err) {
+  //   console.error(err);
+  //   res.status(500).json({ message: 'Server Error' });
+  // }
+  // editInfo = await UserModel.find(req.params.userID)({
+  //   username: req.body.username,
+  //   email: req.body.email,
+  // })
+   // console.log("setAvatar is called", req)
+   try {
+    const userid = req.params.id;
+
+    const newEmail = req.body.email;
+    const newUsername = req.body.username;
+
+    const userData = await UserModel.findByIdAndUpdate(userid,
+
+        {
+            newEmail,
+            newUsername
+        },
+        { new: true }
+
+    );
+    return res.json({ setEmail: userData.newEmail, setUsername: userData.newUsername});
+} catch (ex) {
+    next(ex);
+}
+})
+
 // The following are apis for products, should we put them in their page to have microservice architecture? --------------
 router.post('/postProduct', async (req, res) => {
   

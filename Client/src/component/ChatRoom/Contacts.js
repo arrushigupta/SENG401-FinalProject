@@ -1,91 +1,140 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
+import { getUnreadMessagesCountRoute } from "../../utils/Routes";
 // import Logo  from "../../assets/logo.svg"
 import Logo from "../../img/dinosM.png"
-function Contacts({contacts,currentUser,changeChat}) {
-    const[currentUserName,setCurrentUserName] = useState(undefined);
-    const[currentUserImage,setCurrentUserImage] = useState(undefined);
-    const [currentSelected,setCurrentSelected] = useState(undefined);
-    useEffect(()=>
-    { 
-        if(currentUser){
-            setCurrentUserName(currentUser.username);
-            setCurrentUserImage(currentUser.avatarImage);
-            console.log(currentUser.username)
-            // console.log(currentUser.avatarImage)
-
-            
-        }
-    },[currentUser]);
-
-    useEffect(()=>
-    { 
-        if(currentSelected){
-          console.log("Changed current selected user")
-
-        }
-    },[currentSelected]);
-
-    useEffect(()=>
-    { 
-        if(contacts){
-           console.log("received contacts", contacts)
-            
-        }
-    },[contacts]);
+import axios from 'axios';
 
 
-    const changeCurrentChat = (index,contact)=>{
-        setCurrentSelected(index);
-        changeChat(contact);
-    };
+function Contacts({ contacts, currentUser, changeChat }) {
+  const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [currentUserImage, setCurrentUserImage] = useState(undefined);
+  const [currentSelected, setCurrentSelected] = useState(undefined);
+  const [currentContact, setcurrentContact] = useState(undefined);
+
+  useEffect(() => {
+    if (currentUser) {
+      setCurrentUserName(currentUser.username);
+      setCurrentUserImage(currentUser.avatarImage);
+      // console.log(currentUser.username)
+      // console.log(currentUser.avatarImage)
+
+
+    }
+  }, [currentUser]);
+
+  const updateFieldInArray = (id, newValue, index) => {
+
+    
+    setcurrentContact((prevItems) =>
+      prevItems.map((item) =>
+      item._id === id ? { ...item, unreadCount: newValue } : item
+      )
+    )
+  };
+
+  useEffect(() => {
+    if (currentContact) {
+
+      // console.log("current chat data updated ", currentContact)
+
+
+    }
+  }, [currentContact]);
+
+  useEffect(() => {
+    if (contacts === undefined || contacts === [])
+      return
+    setcurrentContact(contacts)
+
+    async function fetchData(data, index) {
+      const response = await axios.post(getUnreadMessagesCountRoute, {
+        from: data._id,
+        to: currentUser._id
+      })
+      // console.log(data, currentUser._id , response.data.unreadCount)
+      updateFieldInArray(data._id, response.data.unreadCount.toString(), index);
+
+      return (response.data.unreadCount).toString()
+    }
+
+
+
+    contacts.forEach((element, index) => {
+      const unreadCount = fetchData(element, index)
+    });
+    // fetchData();
+
+  }, [contacts]);
+
+
+
+  useEffect(() => {
+    if (currentSelected) {
+      console.log("Changed current selected user")
+
+    }
+  }, [currentSelected]);
+
+  useEffect(() => {
+    if (contacts) {
+      console.log("received contacts", contacts)
+
+    }
+  }, [contacts]);
+
+
+  const changeCurrentChat = (index, contact) => {
+    setCurrentSelected(index);
+    changeChat(contact);
+  };
   return (
     <>
-        {
-            currentUserName&&currentUserImage &&(
+      {
+        currentUserName && currentUserImage && (
 
-            <Container>
+          <Container>
             <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h3>Dinos Marketplace</h3>
-          </div>
-          <div className="contacts">
-            {contacts.map((contact, index) => {
-              return (
-                <div
-                  key={contact._id}
-                  className={`contact ${
-                    index === currentSelected ? "selected" : ""
-                  }`}
-                  onClick={() => changeCurrentChat(index, contact)}
-                >
-                  <div className="avatar">
-                    <img
-                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                      alt="avatar"
-                    />
-                  </div>
-                  <div className="username">
-                    <h3>{contact.username}</h3>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="current-user">
-            <div className="avatar">
-              <img
-                src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="avatar"
-              />
+              <img src={Logo} alt="logo" />
+              <h3>Dinos Marketplace</h3>
             </div>
-            <div className="username">
-              <h2>{currentUserName}</h2>
+            <div className="contacts">
+              {contacts.map((contact, index) => {
+                return (
+                  <div
+                    key={contact._id}
+                    className={`contact ${index === currentSelected ? "selected" : ""
+                      }`}
+                    onClick={() => changeCurrentChat(index, contact)}
+                  >
+                    <div className="avatar">
+                      <img
+                        src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                        alt="avatar"
+                      />
+                    </div>
+                    <div className="username">
+                      <h3>{contact.username}</h3>
+                      {currentContact&&currentContact[index]&&currentContact[index].unreadCount && <h3>{currentContact[index].unreadCount}</h3>}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-            </Container>
-            )
-        }
+            <div className="current-user">
+              <div className="avatar">
+                <img
+                  src={`data:image/svg+xml;base64,${currentUserImage}`}
+                  alt="avatar"
+                />
+              </div>
+              <div className="username">
+                <h2>{currentUserName}</h2>
+              </div>
+            </div>
+          </Container>
+        )
+      }
     </>
   )
 }

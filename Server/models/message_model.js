@@ -15,7 +15,15 @@ const messageSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:"User",
     required:true,
-  }
+  },
+  recipient: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User",
+    required:true,
+  },
+
+  read: Boolean, // Flag to indicate if the message has been read
+
 
 },
 {
