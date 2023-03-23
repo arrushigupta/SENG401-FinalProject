@@ -71,7 +71,7 @@ export default function ProductModal({ userID, name, description, price, categor
                     Seller
                   </p>
                   <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">
-                    Your mother
+                    Your mother 
                   </p>
                 </div>
                 <div className="flex items-start justify-start p-1 rounded-t">

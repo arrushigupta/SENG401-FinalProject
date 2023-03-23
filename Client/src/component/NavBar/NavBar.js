@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Button from '../Additional/Button'
 import DashboardContacts from '../Dashboard/DashboardContacts';
+import SearchBox from '../SearchBox/SearchBox';
 
 
 
@@ -48,7 +49,9 @@ export default function NavBar({ contacts, currentUser, changeChat }) {
 
                     </ul>
                 </div>
-
+                <div> 
+                    <SearchBox> </SearchBox>
+                </div>
                 <div class="flex md:order-2">
                 <DashboardContacts contacts={contacts} currentUser={currentUser} changeChat={changeChat} />
 
