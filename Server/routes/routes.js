@@ -163,9 +163,9 @@ router.post('/updateInfo/:userID', async (req, res) => {
 
     );
     return res.json({ setEmail: userData.newEmail, setUsername: userData.newUsername});
-} catch (ex) {
-    next(ex);
-}
+  } catch (ex) {
+      next(ex);
+  }
 })
 
 // The following are apis for products, should we put them in their page to have microservice architecture? --------------

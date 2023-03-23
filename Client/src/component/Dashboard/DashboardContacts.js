@@ -84,7 +84,7 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
                   (drawerOpen ? " translate-x-0 " : " translate-x-full ")
                 }
               >
-                <header className="p-4 font-bold text-lg absolute mt-20">Inbox</header>
+                <header className="p-4 font-bold text-2xl absolute mt-20 text-white ">Your Inbox</header>
                 <Container>
                   <div className="contacts">
                     {contacts.map((contact, index) => {
@@ -128,7 +128,7 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
 const Container = styled.div`
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
-  background-color: #36454F;
+  background-color: #2a2d35;
   min-height: 100vh;
   scroll-behaviour: smooth;
   
@@ -149,7 +149,7 @@ const Container = styled.div`
       }
     }
     .contact {
-      background-color: #616161;
+      background-color: #CCCCCC;
       min-height: 6rem;
       cursor: pointer;
       width: 90%;
@@ -166,7 +166,7 @@ const Container = styled.div`
       }
       .username {
         h3 {
-          color: white;
+          color: black;
         }
       }
     }
