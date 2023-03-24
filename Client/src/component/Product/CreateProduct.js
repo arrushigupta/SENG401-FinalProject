@@ -25,7 +25,7 @@ export default function CreateProduct({ closeModal, updateProductState}){
 
     // Updates from values on input change
     const handleInputUpdate = (event) => {
-        console.log(event.target.name);
+        console.log(">>>" + event.target.name);
 
         setFormValues({
             ...formValues,
@@ -130,10 +130,25 @@ export default function CreateProduct({ closeModal, updateProductState}){
                         <label htmlFor="price" className="block mb-2 font-bold text-gray-700">Price</label>
                         <input type="number" name="price" id="price" className="w-full px-3 py-2 placeholder-gray-400 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter price" value={formValues["price"]} onChange={handleInputUpdate} required step='any'/>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="category" className="block mb-2 font-bold text-gray-700">Category</label>
-                        <input type="text" name="category" id="category" className="w-full px-3 py-2 placeholder-gray-400 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter category" value={formValues["category"]} onChange={handleInputUpdate} required />
-                    </div>
+                    <label>
+                        Category
+                        <select
+                            value={formValues["category"]}
+                            onChange={handleInputUpdate}
+                            name="category"
+                            id="category"
+                            className="form-select block w-full mt-1 border rounded">
+                            <option value="Furniture">Furniture</option>
+                            <option value="Textbooks">Textbooks</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Vehicles">Vehicles</option>
+                            <option value="Services">Services</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Events">Events</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </label>
                     <div className="mb-4">
                         <label htmlFor="description" className="block mb-2 font-bold text-gray-700">Description</label>
                         <textarea name="description" id="description" className="w-full px-3 py-2 placeholder-gray-400 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter description" value={formValues["description"]} onChange={handleInputUpdate} required />
