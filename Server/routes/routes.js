@@ -75,6 +75,7 @@ router.post("/login", (req, res) => {
             status: "success",
             isAvatarImageSet: user.isAvatarImageSet,
             avatarImage: user.avatarImage,
+            emailVerified: user.emailVerified,
             token,
           });
         })
@@ -96,16 +97,26 @@ router.post("/login", (req, res) => {
       });
     });
 });
-router.post("/verifyEmail", async (req, res) => {
-  console.log(req.body); // here it will change the users
+router.patch("/verifyEmail/:user", async (req, res) => {
+  console.log(req.params.user); // here it will change the users
+
+  await UserModel.updateOne(
+    { username: req.params.user },
+    { $set: { emailVerified: true } },
+    (err, user) => {
+      console.log(user);
+      err ? console.log(err) : res.status(200).json({ status: "success" });
+    }
+  ).clone();
 });
+
 router.post("/register", async (req, res) => {
-  // if (!/\b[A-Za-z0-9._%+-]+@ucalgary\.ca\b/.test(req.body.email)) {
-  //   return res.json({
-  //     message: "Email must be a ucalgary.ca email",
-  //     status: "error",
-  //   });
-  // }
+  if (!/\b[A-Za-z0-9._%+-]+@ucalgary\.ca\b/.test(req.body.email)) {
+    return res.json({
+      message: "Email must be a ucalgary.ca email",
+      status: "error",
+    });
+  }
   // need to check if user with same email or username exists in the database
   const emailCheck = await UserModel.findOne({ email: req.body.email });
   if (emailCheck)
@@ -125,14 +136,15 @@ router.post("/register", async (req, res) => {
       const dataToSave = await data.save();
 
       // will need to be changed to site's url
-      const url = `localhost:${4000}/verifyEmail?user=${req.body.username}`;
+      const url = `http://localhost:3000/verifyEmail?user=${req.body.username}`;
       const msg = {
         to: req.body.email, // to the user's email
         from: "dinos.marketplace401@gmail.com", // Change to your verified sender
         subject: "Hello from DinosMarketplace!",
-        text: `Hey, we just got to verify that you are you click this link here to continue with your login. (you have 24 hours to accept this email) ${url}`,
         html: `<p>Hello from DinosMarketplace! </p>
-      <p>Hey, we just got to verify that you are you click this link here to continue with your login. (you have 24 hours to accept this email) ${url}</p>`,
+      <p>Please verify your account by clicking the link</p>
+      <a target="_blank" href="${url}">Here</a>
+      <p>If this was not you please disregard this email.</p>`,
       };
       sgMail
         .send(msg)

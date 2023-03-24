@@ -45,6 +45,14 @@ function App() {
                 }
               />
               <Route
+                path="/verifyEmail:user"
+                element={
+                  <ProtectedRoute>
+                    <VerifyEmail />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/verifyEmail"
                 element={
                   <ProtectedRoute>

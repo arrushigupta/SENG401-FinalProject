@@ -1,0 +1,2 @@
+source ./sendgrid.env
+nodemon

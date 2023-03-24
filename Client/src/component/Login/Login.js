@@ -89,10 +89,18 @@ export default function Login() {
           console.log(JSON.parse(localStorage.getItem("chat-app-user"))._id);
 
           notify("success");
-          setTimeout(() => {
-            console.log("Delayed for 1 second.");
-            navigate("/verifyEmail");
-          }, "1800");
+          console.log("response.emailVerified: " + response.emailVerified);
+          if (response.emailVerified) {
+            setTimeout(() => {
+              console.log("Delayed for 1 second.");
+              navigate("/home");
+            }, "1800");
+          } else {
+            setTimeout(() => {
+              console.log("Delayed for 1 second.");
+              navigate("/verifyEmail?user=?");
+            }, "1800");
+          }
         } else {
           notify("error");
         }
