@@ -172,7 +172,7 @@ const Container = styled.div`
       }
     }
     .contact {
-      background-color: #C21010;
+      background-color: white;
       min-height: 5rem;
       cursor: pointer;
       width: 90%;
@@ -189,16 +189,16 @@ const Container = styled.div`
       }
       .username {
         h3 {
-          color: white;
+          color: black;
         }
       }
     }
     .selected {
-      background-color: #FBCB0A;
+      background-color: #B91C1C;
     }
   }
   .current-user {
-    background-color: #FBCB0A;
+    background-color: #DC2626;
     border-radius: 0.2rem;
     width: 90%;
     margin-left: 1rem;

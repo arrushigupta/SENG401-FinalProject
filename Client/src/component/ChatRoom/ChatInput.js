@@ -34,7 +34,7 @@ export default function ChatInput({ handleSendMsg }) {
         </div> */}
       </div>
       <form className='input-container' onSubmit={(e) => sendMsg(e)}>
-        <input type="text" placeholder='type your message here' value={msg} onChange={(e) => setmsg(e.target.value)} />
+        <input type="text" placeholder='Type your message here' value={msg} onChange={(e) => setmsg(e.target.value)} />
         <button className='submit' type='submit' >
           <IoMdSend />
         </button>
@@ -46,7 +46,7 @@ const Container = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 2% 98%;
-  background-color: #8B0000;
+  background-color: #282c34;
   padding: 0 2rem;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;
@@ -118,7 +118,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #F99417;
+      background-color: #DC2626;
       border: none;
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;

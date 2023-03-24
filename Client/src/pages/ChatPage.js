@@ -110,7 +110,7 @@ const Container = styled.div`
     border-radius: 0.4rem;
     height: 75vh;
     width: 85vw;
-    background-color: #DC2626;
+    background-color: #2a2d35;
     display: grid;
     grid-template-columns: 30% 70%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
