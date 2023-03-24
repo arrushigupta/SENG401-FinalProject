@@ -8,7 +8,6 @@ import Button from '../Additional/Button'
 import { io } from 'socket.io-client';
 
 function ImageCarousel(props) {
-  console.log("Fuck ")
   return (
     <div
       class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
@@ -24,8 +23,10 @@ function ImageCarousel(props) {
 
 function CarouselButton(props) {
   let classAttribute =  "absolute top-0 bottom-0 left-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+  let shape = "M15.75 19.5L8.25 12l7.5-7.5";
   if (props.slide == "next"){
     classAttribute = "absolute top-0 bottom-0 right-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+    shape = "M8.25 4.5l7.5 7.5-7.5 7.5";
   }
   return (
     <button
@@ -44,7 +45,7 @@ function CarouselButton(props) {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M15.75 19.5L8.25 12l7.5-7.5" />
+            d={shape} />
         </svg>
       </span>
       <span
