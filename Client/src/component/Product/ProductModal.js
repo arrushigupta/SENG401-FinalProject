@@ -1,6 +1,8 @@
 import React, { useEffect, useContext, useState, useRef } from 'react'
 import { DINOSGet, DINOSPost } from '../../scripts/backend-functions'
 import LoadingContext from "../../context/LoadingContext";
+import UserContext from "../../context/UserContext";
+
 import img from '../../img/Gorilla.jpg';
 import axios from 'axios';
 import { addMessageRoute, host } from "../../utils/Routes";
@@ -58,6 +60,10 @@ function CarouselButton(props) {
 export default function ProductModal({ userID, name, description, price, category, setShowModal, images }) {
 
   const { setLoading } = useContext(LoadingContext);
+  const loggedInUserID = useContext(UserContext);
+  console.log(loggedInUserID);
+  console.log(loggedInUserID.userID);
+  console.log(userID);
   const [message, setMessage] = useState('');
   const [seller, setSeller] = useState(undefined);
   const socket = useRef();
@@ -193,12 +199,15 @@ export default function ProductModal({ userID, name, description, price, categor
 
             </div>
             {/*footer*/}
-            <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b bg-zinc-700">
+            {loggedInUserID.userID !== userID && (
+              <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b bg-zinc-700">
               <input type="text" onChange={handleChange}
                 value={message} placeholder="Write a message to seller" class="px-3 py-3 mr-7  placeholder-slate-400 text-slate-600 relative bg-slate-200 rounded text-sm border-0 shadow outline-slate-200 focus:outline-slate-300 focus:ring w-full">
               </input>
               <Button onClick={handleClick} label="Message Seller" />
             </div>
+            )}
+            
           </div>
         </div>
       </div>
