@@ -57,7 +57,7 @@ function CarouselButton(props) {
   );
 
 }
-export default function ProductModal({ userID, name, description, price, category, setShowModal, images }) {
+export default function ProductModal({ userID, name, description, price, category, setShowModal, images, ProductID }) {
 
   const { setLoading } = useContext(LoadingContext);
   const loggedInUserID = useContext(UserContext);
@@ -66,7 +66,10 @@ export default function ProductModal({ userID, name, description, price, categor
   console.log(userID);
   const [message, setMessage] = useState('');
   const [seller, setSeller] = useState(undefined);
+  const [product, setProduct] = useState(undefined);
+
   const socket = useRef();
+
   useEffect(() => {
     DINOSGet("http://localhost:4000/api/specificUser/" +userID, setLoading, setSeller);
   }, []);

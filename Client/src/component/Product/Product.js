@@ -7,7 +7,8 @@ import img from "../../img/dinosM.png";
 
 
 
-export default function Product({ name, description, price, userID, category, images}){
+
+export default function Product({ name, description, price, userID, category, images, _id}){
 
     let url = [img];
     const { setLoading } = useContext(LoadingContext);
@@ -26,8 +27,6 @@ export default function Product({ name, description, price, userID, category, im
         }
         
     }
-       
-    // possibly will add an array of tags
 
     //product use state for testing
     const [product, setProduct] = useState({
@@ -36,6 +35,7 @@ export default function Product({ name, description, price, userID, category, im
         price: 20,
         image: null,
     });
+
     //use state for modal
     const [showModal, setShowModal] = React.useState(false);
     //function to load modal
@@ -47,8 +47,7 @@ export default function Product({ name, description, price, userID, category, im
 
     return(
         <>
-        <div class = " group w-fit h-fit rounded-lg bg-slate-100 hover:bg-red-600 hover:shadow-xl active:bg-red-700 m-4 md:hover:text-neutral-50"
-             onClick={loadModal}>
+        <div onClick={loadModal}>
             
             <div class="relative max-w-sm rounded overflow-hidden shadow-lg ">
                 <span class="absolute top-1 right-1 inline-block group-hover:bg-red-600 bg-gray-100 opacity-60 group-hover:opacity-100 rounded-full px-3 py-1 mx-2 text-lg font-semibold group-hover:text-gray-100 text-gray-700 mr-2 mb-2">${price}</span>
@@ -63,9 +62,10 @@ export default function Product({ name, description, price, userID, category, im
                 
             </div>
         </div>
+        
         {showModal ? (
             <>
-                <ProductModal userID={userID} category = {category} name = {name} description = {description} price = {price} setShowModal = {setShowModal} images = {url} />
+                <ProductModal userID={userID} category = {category} name = {name} description = {description} price = {price} ProductID = {_id} setShowModal = {setShowModal} images = {url} />
             </>
       ) : null}
             

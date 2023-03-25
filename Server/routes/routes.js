@@ -111,12 +111,14 @@ router.patch("/verifyEmail/:user", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
+
   if (!/\b[A-Za-z0-9._%+-]+@ucalgary\.ca\b/.test(req.body.email)) {
     return res.json({
       message: "Email must be a ucalgary.ca email",
       status: "error",
     });
   }
+
   // need to check if user with same email or username exists in the database
   const emailCheck = await UserModel.findOne({ email: req.body.email });
   if (emailCheck)
@@ -180,6 +182,7 @@ router.post("/updateInfo/:userID", async (req, res) => {
   //   email: req.body.email,
   // })
   // console.log("setAvatar is called", req)
+
   try {
     const userid = req.params.id;
 
