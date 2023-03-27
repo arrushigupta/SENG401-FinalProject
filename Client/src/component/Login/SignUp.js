@@ -32,7 +32,7 @@ export default function SignUp() {
     createAccount();
   };
 
-  const notify = (label) => {
+  const notify = (label, error) => {
     if (label === "success") {
       toast.success("User Registered", {
         position: "top-center",
@@ -46,7 +46,7 @@ export default function SignUp() {
       });
     }
     if (label === "error") {
-      toast.error("Password doesn't match with Confirm Password", {
+      toast.error(error, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -85,7 +85,7 @@ export default function SignUp() {
             navigate("/");
           }, "3000");
         } else {
-          notify("error");
+          notify("error", response.message);
         }
       });
     } catch (error) {
