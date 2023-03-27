@@ -4,6 +4,7 @@ import { getUnreadMessagesCountRoute } from "../../utils/Routes";
 // import Logo  from "../../assets/logo.svg"
 import Logo from "../../img/dinosM.png"
 import axios from 'axios';
+import NotificationIcon from "./NotificationIcon"
 
 
 function Contacts({ contacts, currentUser, changeChat }) {
@@ -25,10 +26,10 @@ function Contacts({ contacts, currentUser, changeChat }) {
 
   const updateFieldInArray = (id, newValue, index) => {
 
-    
+
     setcurrentContact((prevItems) =>
       prevItems.map((item) =>
-      item._id === id ? { ...item, unreadCount: newValue } : item
+        item._id === id ? { ...item, unreadCount: newValue } : item
       )
     )
   };
@@ -113,9 +114,10 @@ function Contacts({ contacts, currentUser, changeChat }) {
                         alt="avatar"
                       />
                     </div>
-                    <div className="username">
-                      <h3>{contact.username}</h3>
-                      {currentContact&&currentContact[index]&&currentContact[index].unreadCount && <h3>{currentContact[index].unreadCount}</h3>}
+                    <div className="username display:flex align-items:left">
+                      <h3 className="username-name margin-right:250px">{contact.username}</h3>
+                      {currentContact && currentContact[index] && currentContact[index].unreadCount &&
+                        <NotificationIcon currentContact={currentContact} index={index}> </NotificationIcon>}
                     </div>
                   </div>
                 );

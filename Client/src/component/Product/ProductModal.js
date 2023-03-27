@@ -24,9 +24,9 @@ function ImageCarousel(props) {
 }
 
 function CarouselButton(props) {
-  let classAttribute =  "absolute top-0 bottom-0 left-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+  let classAttribute = "absolute top-0 bottom-0 left-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
   let shape = "M15.75 19.5L8.25 12l7.5-7.5";
-  if (props.slide == "next"){
+  if (props.slide == "next") {
     classAttribute = "absolute top-0 bottom-0 right-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
     shape = "M8.25 4.5l7.5 7.5-7.5 7.5";
   }
@@ -57,7 +57,7 @@ function CarouselButton(props) {
   );
 
 }
-export default function ProductModal({ userID, name, description, price, category, setShowModal, images }) {
+export default function ProductModal({ userID, name, description, price, category, setShowModal, images, ProductID }) {
 
   const { setLoading } = useContext(LoadingContext);
   const loggedInUserID = useContext(UserContext);
@@ -66,16 +66,19 @@ export default function ProductModal({ userID, name, description, price, categor
   console.log(userID);
   const [message, setMessage] = useState('');
   const [seller, setSeller] = useState(undefined);
+  const [product, setProduct] = useState(undefined);
+
   const socket = useRef();
+
   useEffect(() => {
-    DINOSGet("http://localhost:4000/api/specificUser/" +userID, setLoading, setSeller);
+    DINOSGet("http://localhost:4000/api/specificUser/" + userID, setLoading, setSeller);
   }, []);
   useEffect(() => {
-    if (seller !==undefined){
+    if (seller !== undefined) {
       console.log(seller);
     }
   }, [seller]);
-  
+
   const handleChange = (event) => {
     setMessage(event.target.value);
     console.log(message)
@@ -155,17 +158,17 @@ export default function ProductModal({ userID, name, description, price, categor
                       return <ImageCarousel key={index} image={img} />
                     })}
                   </div>
-                  {images.length>1 ? 
-                  (<>
-                  
-                  <CarouselButton key= {0} name="Previous" slide= "prev"/>
-                  <CarouselButton key = {1} name="Next" slide= "next"/>
-                  
-                  </>)
-                  : null}
-                  
+                  {images.length > 1 ?
+                    (<>
 
-                  
+                      <CarouselButton key={0} name="Previous" slide="prev" />
+                      <CarouselButton key={1} name="Next" slide="next" />
+
+                    </>)
+                    : null}
+
+
+
                 </div>
                 {/* </div> */}
                 {/* End of Carousel */}
@@ -173,9 +176,9 @@ export default function ProductModal({ userID, name, description, price, categor
                   <p className="my-2 text-slate-500 text-lg leading-relaxed">
                     Seller
                   </p>
-                  
-                  {seller!==undefined && seller[0].username!==undefined && <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">{seller[0].username}</p>}
-                  {seller===undefined &&  <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">placeholder</p>}
+
+                  {seller !== undefined && seller[0] !== undefined && seller[0].username !== undefined && <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">{seller[0].username}</p>}
+                  {seller === undefined && <p class="inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mx-2 my-2 ">placeholder</p>}
                 </div>
                 <div className="flex items-start justify-start p-1 rounded-t">
                   <p className="my-2 text-slate-500 text-lg leading-relaxed">
@@ -201,13 +204,13 @@ export default function ProductModal({ userID, name, description, price, categor
             {/*footer*/}
             {loggedInUserID.userID !== userID && (
               <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b bg-zinc-700">
-              <input type="text" onChange={handleChange}
-                value={message} placeholder="Write a message to seller" class="px-3 py-3 mr-7  placeholder-slate-400 text-slate-600 relative bg-slate-200 rounded text-sm border-0 shadow outline-slate-200 focus:outline-slate-300 focus:ring w-full">
-              </input>
-              <Button onClick={handleClick} label="Message Seller" />
-            </div>
+                <input type="text" onChange={handleChange}
+                  value={message} placeholder="Write a message to seller" class="px-3 py-3 mr-7  placeholder-slate-400 text-slate-600 relative bg-slate-200 rounded text-sm border-0 shadow outline-slate-200 focus:outline-slate-300 focus:ring w-full">
+                </input>
+                <Button onClick={handleClick} label="Message Seller" />
+              </div>
             )}
-            
+
           </div>
         </div>
       </div>
