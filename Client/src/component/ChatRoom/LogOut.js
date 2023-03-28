@@ -29,12 +29,12 @@ function LogOut({setCurrentChat}) {
       <Button onClick={handleCloseChat} >
         <IoMdClose />
       </Button>
-      <Button onClick={handleClickLogOut} >
+      {/* <Button onClick={handleClickLogOut} >
         <BiPowerOff />
       </Button>
       <Button onClick={handleClickDashboard} >
         <BiHomeAlt />
-      </Button>
+      </Button> */}
     </div>
   )
 }
