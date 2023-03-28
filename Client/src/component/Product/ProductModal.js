@@ -86,7 +86,7 @@ export default function ProductModal({ userID, name, description, price, categor
     const data = await axios.post(addMessageRoute, {
       from: JSON.parse(localStorage.getItem("chat-app-user"))._id,
       to: userID,
-      message: message,
+      message: "Regarding " + name + " : " + message,
     });
     socket.current = io(host);
     socket.current.emit("add-user", localStorage.getItem("chat-app-user")._id);
@@ -94,7 +94,7 @@ export default function ProductModal({ userID, name, description, price, categor
     socket.current.emit("send-msg", {
       from: JSON.parse(localStorage.getItem("chat-app-user"))._id,
       to: userID,
-      message: message,
+      message: "Regarding " + name + " : " +  message,
     });
 
     setShowModal(false);
