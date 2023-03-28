@@ -27,30 +27,10 @@ export default function SearchBox({
           type="text"
           value={searchQuery}
           onChange={handleSearch}
-          className="block w-full  py-2 text-black-700 bg-white border rounded-full focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          className="block w-full px-4 py-2 text-black-700 bg-white border rounded-full focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
           placeholder="Search Product..."
         />
-
-        <button
-          onClick={handleSubmit}
-          className="px-4 text-white bg-red-600 rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </button>
-        <label className="w-1/2 justify-start flex-cols items-start my-2">
+        <label className="w-1/2 justify-start flex-cols items-start">
           Category
           <select
             value={searchCategory}
@@ -71,6 +51,25 @@ export default function SearchBox({
             <option value="Other">Other</option>
           </select>
         </label>
+        <button
+          onClick={handleSubmit}
+          className="px-4 text-white bg-red-600 rounded-full "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );
