@@ -58,12 +58,14 @@ router.post("/addmsg", async (req, res, next) => {
     if (data) {
       const msg = {
         to: to_email, // Change to your recipient
-        from: "dinos.marketplace.seng401@gmail.com", // Change to your verified sender
+        from: "dinos.marketplace401@gmail.com", // Change to your verified sender
         subject: "New Message from DinosMarketplace",
-        text: `Hey, you just got a new message from ${sender}: ${message}`,
-        html: `<p>Hey, Welcome to DinosMarketplace. </p>
-                <p>You just got a new message from ${sender}: ${message}</p>`,
+        // text: `Hey, you just got a new message from ${sender}: ${message}`,
+        html: `<p>Hello from DinosMarketplace! </p>
+        <p>You just got a new message from ${sender}: ${message}</p>`,
       };
+
+      // console.log(msg)
       sgMail
         .send(msg)
         .then(() => {
