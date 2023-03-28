@@ -145,6 +145,7 @@ function Contacts({ contacts, currentUser, changeChat }) {
 
 const Container = styled.div`
   display: grid;
+  border-radius: 0.4rem;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
   background-color: #2a2d35;
