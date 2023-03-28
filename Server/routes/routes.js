@@ -285,9 +285,9 @@ router.get("/getSpecificProducts/:type/:value", (req, res) => {
 
 
 router.get("/getSpecificProductsTwo/:type/:value/:type2/:value2", (req, res) => {
-  const type = req.body.type;
-  const type2 = req.body.type2;
-  const value = req.body.value;
+  const type = req.params.type;
+  const type2 = req.params.type2;
+  const value = req.params.value;
   const value2 = req.params.value2;
   console.log(`type: ${type}, type2: ${type2}, value: ${value}, value2: ${value2}`);
   const regex = new RegExp(value2, "i"); // "i" means case-insensitive

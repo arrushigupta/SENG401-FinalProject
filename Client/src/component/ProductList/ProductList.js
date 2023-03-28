@@ -52,12 +52,12 @@ export default function ProductList({ chooseMessage, productState }) {
                         apiString2 = getTwoSpecificProductsCategoryRoute + searchCategory + "/name/" + searchQuery;
                     }
                 }
+                console.log(">>> api: " + apiString2);
                 
                 DINOSGet(apiString2, setLoading, setProducts);
                 setPrevSearchFlag(searchFlag);
             } else {
                 // No search has happened: load all items
-                
                 DINOSGet(getAllProductsRoute, setLoading, setProducts);
             }
 
