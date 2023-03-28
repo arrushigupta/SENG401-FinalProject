@@ -49,9 +49,6 @@ export default function NavBar({ contacts, currentUser, changeChat }) {
 
                     </ul>
                 </div>
-                <div> 
-                    <SearchBox> </SearchBox>
-                </div>
                 <div class="flex md:order-2">
                 <DashboardContacts contacts={contacts} currentUser={currentUser} changeChat={changeChat} />
 

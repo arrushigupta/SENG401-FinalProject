@@ -267,7 +267,7 @@ router.get("/getAllProducts", async (req, res) => {
           .status(400)
           .json({ message: error.message, status: "error" });
       }
-      console.log("Retrieved products:", products);
+      //console.log("Retrieved products:", products);
       return res.json(products);
     });
 });
@@ -278,9 +278,13 @@ router.get("/getAllProducts", async (req, res) => {
 
 router.get("/getSpecificProducts/:type/:value", (req, res) => {
   const type = req.params.type;
-  const value = req.params.value;
+  var value = req.params.value;
   const filter = {};
-  filter[type] = value.toString();
+
+  console.log(`type: ${type}, value: ${value}`);
+  const regex = new RegExp(value, "i"); // "i" means case-insensitive
+
+  filter[type] = regex;
 
   ProductModel.find(filter, (err, products) => {
     if (err) {
@@ -290,6 +294,28 @@ router.get("/getSpecificProducts/:type/:value", (req, res) => {
       res.send(products);
     }
   }).sort({_id:-1});
+});
+
+
+router.get("/getSpecificProductsTwo/:type/:value/:type2/:value2", (req, res) => {
+  const type = req.body.type;
+  const type2 = req.body.type2;
+  const value = req.body.value;
+  const value2 = req.params.value2;
+  console.log(`type: ${type}, type2: ${type2}, value: ${value}, value2: ${value2}`);
+  const regex = new RegExp(value2, "i"); // "i" means case-insensitive
+  const filter = {};
+  filter[type] = value.toString();
+  filter[type2] = regex;
+
+  ProductModel.find(filter, (err, products) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error retrieving products");
+    } else {
+      res.send(products);
+    }
+  }).sort({ _id: -1 });
 });
 
 // -------------------------------------------------------------------------------------------------------------------------
