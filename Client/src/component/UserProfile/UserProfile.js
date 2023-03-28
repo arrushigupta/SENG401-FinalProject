@@ -46,12 +46,10 @@ export default function UserProfile(){
         new Promise(r => setTimeout(r, 20000));
         
         DINOSPost("http://localhost:4000/api/updateInfo/" + JSON.parse(localStorage.getItem("chat-app-user"))._id, setLoading,  updatedFormValues).then((response) => {
-            // alert(updatedFormValues["images"][0])
-            // alert("Hey")
             setFormValues({
                 userID: JSON.parse(localStorage.getItem("chat-app-user"))._id,
-                username: "",
-                email: "",
+                username: response.setUsername,
+                email: response.setEmail,
             });
         });
     }
