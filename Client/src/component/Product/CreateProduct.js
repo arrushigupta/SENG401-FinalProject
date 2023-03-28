@@ -106,13 +106,13 @@ export default function CreateProduct({ closeModal, updateProductState}){
                 userID: JSON.parse(localStorage.getItem("chat-app-user"))._id,
                 name: "",
                 description: "",
-                category: "",
+                category: "Furniture",
                 price: 0, 
                 images: [], 
                 date: new Date(),
             });
+            updateProductState();
         });
-        updateProductState();
         closeModal();
     }
 

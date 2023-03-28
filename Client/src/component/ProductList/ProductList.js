@@ -29,8 +29,7 @@ export default function ProductList({ chooseMessage, productState }) {
         setLoading(true);
         let uID = JSON.parse(localStorage.getItem("chat-app-user"))._id;
         var apiString = "http://localhost:4000/api/getSpecificProducts/userID/" + JSON.parse(localStorage.getItem("chat-app-user"))._id;
-        console.log("Message " + chooseMessage);
-
+        console.log(">>> Message == " + chooseMessage);
         setUserID(uID);
         console.log(">>> searchFlag == " + searchFlag);
         console.log(">>> searchCategory == " + searchCategory);
