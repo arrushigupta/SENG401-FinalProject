@@ -31,11 +31,6 @@ export default function UserProfile(){
             [event.target.name]: event.target.value
         });
     }
-
-   
-
-   
-        
         
 
     // Trying to connect backend to post product

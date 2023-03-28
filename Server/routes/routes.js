@@ -165,45 +165,32 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/updateInfo/:userID", async (req, res) => {
-  // try {
-  //   const editInfo = await UserModel.find(req.params.userID);
-
-  //   if (!editInfo) {
-  //     return res.status(404).json({ message: 'userID not found' });
-  //   }
-
-  //   res.json({ message: 'userID found' });
-  // } catch (err) {
-  //   console.error(err);
-  //   res.status(500).json({ message: 'Server Error' });
-  // }
-  // editInfo = await UserModel.find(req.params.userID)({
-  //   username: req.body.username,
-  //   email: req.body.email,
-  // })
-  // console.log("setAvatar is called", req)
-
   try {
-    const userid = req.params.id;
+    const userID = req.params.userID;
+
+    const editInfo = await UserModel.findOne({ _id: userID });
+
+    if (!editInfo) {
+      return res.status(404).json({ message: 'User ID not found' });
+    }
 
     const newEmail = req.body.email;
     const newUsername = req.body.username;
 
     const userData = await UserModel.findByIdAndUpdate(
-      userid,
-
-      {
-        newEmail,
-        newUsername,
-      },
+      userID,
+      { email: newEmail, username: newUsername },
       { new: true }
     );
+
     return res.json({
-      setEmail: userData.newEmail,
-      setUsername: userData.newUsername,
+      setEmail: userData.email,
+      setUsername: userData.username,
     });
-  } catch (ex) {
-    next(ex);
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server Error' });
   }
 });
 
