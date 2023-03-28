@@ -7,6 +7,7 @@ import axios from 'axios';
 import Button from '../Additional/Button';
 import SearchBox from '../SearchBox/SearchBox';
 import LoadingAnimation from './LoadingAnimation';
+import { deleteProductRoute, getAllProductsRoute, getSpecificProductCategoryRoute, getSpecificProductNameRoute, getSpecificProductRoute, getSpecificProductUserIDRoute, getTwoSpecificProductsCategoryRoute } from '../../utils/Routes';
 
 export default function ProductList({ chooseMessage, productState }) {
 
@@ -28,13 +29,10 @@ export default function ProductList({ chooseMessage, productState }) {
     useEffect(() => {
         setLoading(true);
         let uID = JSON.parse(localStorage.getItem("chat-app-user"))._id;
-        var apiString = "http://localhost:4000/api/getSpecificProducts/userID/" + JSON.parse(localStorage.getItem("chat-app-user"))._id;
-        console.log(">>> Message == " + chooseMessage);
+        var apiString = getSpecificProductUserIDRoute + JSON.parse(localStorage.getItem("chat-app-user"))._id;
+        
         setUserID(uID);
-        console.log(">>> searchFlag == " + searchFlag);
-        console.log(">>> searchCategory == " + searchCategory);
-        console.log(">>> searchQuery == " + searchQuery);
-        console.log(">>> productState == " + productState);
+        
 
         if (chooseMessage === 0) {
             // Home page
@@ -43,24 +41,24 @@ export default function ProductList({ chooseMessage, productState }) {
                 var apiString2;
                 if (searchCategory == "All") {
                     if (searchQuery === "") {
-                        apiString2 = "http://localhost:4000/api/getAllProducts";
+                        apiString2 = getAllProductsRoute;
                     } else {
-                        apiString2 = "http://localhost:4000/api/getSpecificProducts/name/" + searchQuery;
+                        apiString2 = getSpecificProductNameRoute + searchQuery;
                     }
                 } else {
                     if (searchQuery === "") {
-                        apiString2 = apiString2 = "http://localhost:4000/api/getSpecificProducts/category/" + searchCategory;
+                        apiString2 = apiString2 = getSpecificProductCategoryRoute + searchCategory;
                     } else {
-                        apiString2 = "http://localhost:4000/api/getSpecificProductsTwo/category/" + searchCategory + "/name/" + searchQuery;
+                        apiString2 = getTwoSpecificProductsCategoryRoute + searchCategory + "/name/" + searchQuery;
                     }
                 }
-                console.log(">>>" + apiString2);
+                
                 DINOSGet(apiString2, setLoading, setProducts);
                 setPrevSearchFlag(searchFlag);
             } else {
                 // No search has happened: load all items
                 
-                DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
+                DINOSGet(getAllProductsRoute, setLoading, setProducts);
             }
 
         } else {
@@ -72,7 +70,7 @@ export default function ProductList({ chooseMessage, productState }) {
 
     const handleDelete = async (_id) => {
 
-        axios.delete(`http://localhost:4000/api/deleteProduct/${_id}`)
+        axios.delete(deleteProductRoute + `${_id}`)
             .then(() => {
                 alert("Product was deleted successfully");
                 setDeletedProductId(_id);

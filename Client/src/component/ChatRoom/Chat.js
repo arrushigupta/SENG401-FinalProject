@@ -23,7 +23,7 @@ export default function ChatContainer({ currentChat, setCurrentChat, currentUser
 
       );
       setMessages(response.data);
-      console.log("MESSAGES", response.data)
+      // console.log("MESSAGES", response.data)
 
     }
     fetchData();

@@ -13,6 +13,7 @@ import ChatPage from "./pages/ChatPage";
 import DashboardPage from "./pages/DashboardPage";
 import VerifyEmail from "./pages/VerifyEmail";
 import SetAvatar from "./component/ChatRoom/SetAvatar";
+// require("dotenv").config();
 
 function App() {
   const [loading, setLoading] = useState(false);

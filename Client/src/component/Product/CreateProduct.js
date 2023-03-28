@@ -6,6 +6,7 @@ import "../../App.css";
 import UploadImage from '../Additional/UploadImage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { postProductRoute } from '../../utils/Routes';
 
 
 
@@ -25,7 +26,7 @@ export default function CreateProduct({ closeModal, updateProductState}){
 
     // Updates from values on input change
     const handleInputUpdate = (event) => {
-        console.log(">>>" + event.target.name);
+        
 
         setFormValues({
             ...formValues,
@@ -35,16 +36,13 @@ export default function CreateProduct({ closeModal, updateProductState}){
 
     const handleInputImages = (event) => {
         let selectedImages = [event.target.files];
-        console.log("FileList:");
-        console.log(selectedImages);
+    
 
 
         setImages([...images, ...selectedImages]);
 
         let imageArr = [];
         for (let i = 0; i < selectedImages[0].length; i++){
-            console.log(selectedImages[0][i]);
-            alert("h")
 
             // Read the file as a data URL
             const reader = new FileReader();
@@ -59,8 +57,8 @@ export default function CreateProduct({ closeModal, updateProductState}){
                 imageArr.push(base64Image);
             };
             
-            // console.log(formValues.images);
-            console.log(imageArr[i]);
+            
+    
         }
 
         // imageArr = [{name:"asjhd"}];
@@ -69,7 +67,7 @@ export default function CreateProduct({ closeModal, updateProductState}){
             images: imageArr
         });
         
-        // console.log(selectedImages[0]);
+       
         
     }
 
@@ -77,15 +75,6 @@ export default function CreateProduct({ closeModal, updateProductState}){
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // console.log(product);
-       
-        // // console.log(formValues)
-        // console.log(images)
-        // // console.log(product);
-        
-        // console.log(formValues.images);
-        
-        // console.log(formValues.images);
         const updatedFormValues = {
             name: formValues.name, 
             description: formValues.description, 
@@ -99,7 +88,7 @@ export default function CreateProduct({ closeModal, updateProductState}){
         // alert(updatedFormValues["images"])
         new Promise(r => setTimeout(r, 20000));
         
-        DINOSPost("http://localhost:4000/api/postProduct", setLoading,  updatedFormValues).then((response) => {
+        DINOSPost(postProductRoute, setLoading,  updatedFormValues).then((response) => {
             // alert(updatedFormValues["images"][0])
             // alert("Hey")
             setFormValues({

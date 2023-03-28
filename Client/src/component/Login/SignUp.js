@@ -8,6 +8,7 @@ import { DINOSPost } from "../../scripts/backend-functions";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { registerRoute } from "../../utils/Routes";
 
 const fields = signupFields;
 let fieldsState = {};
@@ -23,12 +24,11 @@ export default function SignUp() {
 
   const handleChange = (e) => {
     setSignupState({ ...signupState, [e.target.id]: e.target.value });
-    console.log(signupState);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault(); // this wont refresh the page
-    console.log(signupState);
+
     createAccount();
   };
 
@@ -68,12 +68,11 @@ export default function SignUp() {
       return;
     }
     try {
-      DINOSPost("http://localhost:4000/api/register", setLoading, {
+      DINOSPost(registerRoute, setLoading, {
         username: signupState.username,
         email: signupState.email,
         password: signupState.password,
       }).then((response) => {
-        console.log(response);
 
         if (response.status === "success") {
           setUserID(signupState.username);
@@ -81,7 +80,6 @@ export default function SignUp() {
 
           notify("success");
           setTimeout(() => {
-            console.log("Delayed for 3 second.");
             navigate("/");
           }, "3000");
         } else {

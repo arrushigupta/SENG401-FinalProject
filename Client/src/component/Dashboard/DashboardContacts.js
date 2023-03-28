@@ -18,14 +18,14 @@ function DashboardContacts({ contacts, currentUser, changeChat }) {
     if (currentUser) {
       setCurrentUserName(currentUser.username);
       setCurrentUserImage(currentUser.avatarImage);
-      console.log(currentUser.username)
-      console.log(currentUser.avatarImage)
+      // console.log(currentUser.username)
+      // console.log(currentUser.avatarImage)
     }
   }, [currentUser]);
 
   useEffect(() => {
     if (contacts) {
-      console.log("received contacts", contacts)
+      // console.log("received contacts", contacts)
 
     }
   }, [contacts]);

@@ -3,20 +3,20 @@ import LoadingContext from "../../context/LoadingContext";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { DINOSPatch } from "../../scripts/backend-functions";
+import { verifyEmailRoute } from "../../utils/Routes";
+
 export default function EmailVerifcation({ user }) {
-  console.log("in component " + user);
   const navigate = useNavigate();
   const { setLoading } = useContext(LoadingContext);
   const { setUserID } = useContext(UserContext);
   useEffect(() => {
     if (user !== "?") {
-      console.log("in useEffect: " + user);
       setLoading(false);
-      DINOSPatch("http://localhost:4000/api/verifyEmail/" + user, setLoading);
+      DINOSPatch(verifyEmailRoute + user, setLoading);
 
       setTimeout(() => {
-        console.log("Delayed for 1 second.");
-        navigate("/home");
+        
+        navigate("/");
       }, "1800");
     }
   }, []);

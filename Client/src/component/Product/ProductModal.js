@@ -5,7 +5,7 @@ import UserContext from "../../context/UserContext";
 
 import img from '../../img/Gorilla.jpg';
 import axios from 'axios';
-import { addMessageRoute, host } from "../../utils/Routes";
+import { addMessageRoute, host, specificUserRoute } from "../../utils/Routes";
 import Button from '../Additional/Button'
 import { io } from 'socket.io-client';
 
@@ -61,9 +61,7 @@ export default function ProductModal({ userID, name, description, price, categor
 
   const { setLoading } = useContext(LoadingContext);
   const loggedInUserID = useContext(UserContext);
-  console.log(loggedInUserID);
-  console.log(loggedInUserID.userID);
-  console.log(userID);
+  
   const [message, setMessage] = useState('');
   const [seller, setSeller] = useState(undefined);
   const [product, setProduct] = useState(undefined);
@@ -71,17 +69,16 @@ export default function ProductModal({ userID, name, description, price, categor
   const socket = useRef();
 
   useEffect(() => {
-    DINOSGet("http://localhost:4000/api/specificUser/" + userID, setLoading, setSeller);
+    DINOSGet(specificUserRoute + userID, setLoading, setSeller);
   }, []);
   useEffect(() => {
     if (seller !== undefined) {
-      console.log(seller);
     }
   }, [seller]);
 
   const handleChange = (event) => {
     setMessage(event.target.value);
-    console.log(message)
+
   };
 
 
@@ -101,7 +98,7 @@ export default function ProductModal({ userID, name, description, price, categor
     });
 
     setShowModal(false);
-    console.log("Message Sent.")
+    
   }
 
 

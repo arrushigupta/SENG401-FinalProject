@@ -34,7 +34,6 @@ export default function Login() {
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
-    console.log(loginState);
   };
 
   const handleSubmit = (e) => {
@@ -71,33 +70,24 @@ export default function Login() {
   //Handle Login API Integration here
   const authenticateUser = async () => {
     try {
-      DINOSPost("http://localhost:4000/api/login", setLoading, {
+      DINOSPost(loginRoute, setLoading, {
         email: loginState.email,
         password: loginState.password,
       }).then((response) => {
-        console.log(response);
 
         if (response.status === "success") {
           setUserName(loginState.username);
           setLoginState("");
           setUserID(response._id);
           localStorage.setItem("chat-app-user", JSON.stringify(response));
-          console.log(JSON.parse(localStorage.getItem("chat-app-user")));
-          console.log(
-            JSON.parse(localStorage.getItem("chat-app-user")).username
-          );
-          console.log(JSON.parse(localStorage.getItem("chat-app-user"))._id);
 
           notify("success");
-          console.log("response.emailVerified: " + response.emailVerified);
           if (response.emailVerified) {
             setTimeout(() => {
-              console.log("Delayed for 1 second.");
               navigate("/home");
             }, "1800");
           } else {
             setTimeout(() => {
-              console.log("Delayed for 1 second.");
               navigate("/verifyEmail?user=?");
             }, "1800");
           }
@@ -107,7 +97,6 @@ export default function Login() {
       });
     } catch (error) {
       notify("error");
-      console.log(error.message);
     }
   };
 

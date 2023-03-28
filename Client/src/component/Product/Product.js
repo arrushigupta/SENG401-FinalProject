@@ -40,7 +40,6 @@ export default function Product({ name, description, price, userID, category, im
     const [showModal, setShowModal] = React.useState(false);
     //function to load modal
     const loadModal = () => {
-        console.log("loading modal",name, description, price );
         setShowModal(true);
     }
 

@@ -2,8 +2,8 @@ import React from "react";
 
 export default function UploadImage(props){
     return (
-        <div class="flex justify-center">
-            <div class="mb-3 w-96">
+        <div className="flex justify-center">
+            <div className="mb-3 w-96">
                 <label
                 for="formFile"
                     className="block mb-2 font-bold text-gray-700">Insert Image(s)</label>

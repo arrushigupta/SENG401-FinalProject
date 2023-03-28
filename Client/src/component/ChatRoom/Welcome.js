@@ -12,9 +12,9 @@ export default function Welcome() {
           localStorage.getItem("chat-app-user")
         ).username
       );
-      console.log(await JSON.parse(
-        localStorage.getItem("chat-app-user")
-      ).username)
+      // console.log(await JSON.parse(
+      //   localStorage.getItem("chat-app-user")
+      // ).username)
     }
     fetchData();
   }, []);

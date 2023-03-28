@@ -33,7 +33,7 @@ export function DINOSPatch(url, setLoading) {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
   };
-
+  
   fetch(url, requestOptions)
     .then((res) => res.status(200).json({ status: "success" }))
     .catch((err) => {

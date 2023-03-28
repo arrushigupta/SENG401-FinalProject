@@ -6,6 +6,7 @@ import "../../App.css";
 import UploadImage from '../Additional/UploadImage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { updateInfoRoute } from '../../utils/Routes';
 
 
 
@@ -24,7 +25,7 @@ export default function UserProfile(){
 
     // Updates from values on input change
     const handleInputUpdate = (event) => {
-        console.log(event.target.name);
+        
 
         setFormValues({
             ...formValues,
@@ -45,7 +46,9 @@ export default function UserProfile(){
         // alert(updatedFormValues["images"])
         new Promise(r => setTimeout(r, 20000));
         
-        DINOSPost("http://localhost:4000/api/updateInfo/" + JSON.parse(localStorage.getItem("chat-app-user"))._id, setLoading,  updatedFormValues).then((response) => {
+        DINOSPost(updateInfoRoute + JSON.parse(localStorage.getItem("chat-app-user"))._id, setLoading,  updatedFormValues).then((response) => {
+            // alert(updatedFormValues["images"][0])
+            // alert("Hey")
             setFormValues({
                 userID: JSON.parse(localStorage.getItem("chat-app-user"))._id,
                 username: response.setUsername,

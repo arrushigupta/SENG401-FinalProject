@@ -4,16 +4,16 @@ export default function SearchBox({ setSearchQuery, searchQuery, setSearchCatego
 
     const handleCategory = (e) => { 
         setSearchCategory(e.target.value);
-        console.log(">>> category: " + searchCategory);
+        
     }
 
     const handleSearch = (e) => { 
         setSearchQuery(e.target.value);
-        console.log(">>> search: " + searchQuery);
+        
     }
 
     const handleSubmit = (e) => { 
-        console.log(">>> submit button clicked");
+        
         setSearchFlag(searchFlag + 1);
     }
 

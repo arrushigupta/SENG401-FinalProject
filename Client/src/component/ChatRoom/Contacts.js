@@ -72,14 +72,14 @@ function Contacts({ contacts, currentUser, changeChat }) {
 
   useEffect(() => {
     if (currentSelected) {
-      console.log("Changed current selected user")
+      // console.log("Changed current selected user")
 
     }
   }, [currentSelected]);
 
   useEffect(() => {
     if (contacts) {
-      console.log("received contacts", contacts)
+      // console.log("received contacts", contacts)
 
     }
   }, [contacts]);
