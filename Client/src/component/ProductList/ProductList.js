@@ -59,12 +59,13 @@ export default function ProductList({ chooseMessage, productState }) {
                 setPrevSearchFlag(searchFlag);
             } else {
                 // No search has happened: load all items
-                DINOSGet(apiString, setLoading, setProducts);
+                
+                DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
             }
 
         } else {
             // User page. Return all items created by user
-            DINOSGet("http://localhost:4000/api/getAllProducts", setLoading, setProducts);
+            DINOSGet(apiString, setLoading, setProducts);
         }
 
     }, [productState, searchFlag]);

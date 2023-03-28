@@ -6,25 +6,20 @@ const NotificationIcon = ({ currentContact, index }) => {
     // console.log(count)
     return (
 
-        <Container>
+        <div>
 
-            <div className="notification-container">
-                <i className="fa fa-bell notification-icon" />
-                {/* <FaBell size={12} /> */}
+            <div className="relative">
+                
                 {currentContact && currentContact[index] && currentContact[index].unreadCount &&
-                    <span className="notification-badge">
+                    <span className="inline-block bg-red-500 group-focus:bg-white text-white text-sm font-semibold rounded-full px-2 py-1">
                         {currentContact[index].unreadCount}
                     </span>
                 }
             </div>
-        </Container>
+        </div>
 
     );
 };
-
-
-
-
 export default NotificationIcon;
 
 const Container = styled.div`
