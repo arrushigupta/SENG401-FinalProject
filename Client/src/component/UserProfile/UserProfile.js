@@ -31,6 +31,7 @@ export default function UserProfile(){
             ...formValues,
             [event.target.name]: event.target.value
         });
+        // console.log(formValues)
     }
         
 
@@ -55,6 +56,12 @@ export default function UserProfile(){
                 email: response.setEmail,
             });
         });
+        const item = JSON.parse(localStorage.getItem("chat-app-user"));
+        item.username = formValues.username;
+        item.email = formValues.email;
+        localStorage.setItem("chat-app-user", JSON.stringify(item));
+        console.log(JSON.parse(localStorage.getItem("chat-app-user")))
+
     }
 
     return (
