@@ -1,2 +1,2 @@
-source ./sendgrid.env
-nodemon
+set ./sendgrid.env
+npm start
