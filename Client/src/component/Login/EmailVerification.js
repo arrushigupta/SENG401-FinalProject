@@ -6,7 +6,6 @@ import { DINOSPatch } from "../../scripts/backend-functions";
 import { verifyEmailRoute } from "../../utils/Routes";
 import img from "../../img/dinosM.png";
 
-
 export default function EmailVerifcation({ user }) {
   const navigate = useNavigate();
   const { setLoading } = useContext(LoadingContext);
@@ -17,7 +16,6 @@ export default function EmailVerifcation({ user }) {
       DINOSPatch(verifyEmailRoute + user, setLoading);
 
       setTimeout(() => {
-        
         navigate("/");
       }, "1800");
     }
@@ -25,28 +23,49 @@ export default function EmailVerifcation({ user }) {
 
   if (user === "?") {
     return (
-
-      <div class="flex items-center justify-center min-h-screen p-5  min-w-screen">  
-        <div div class="max-w-xl p-8 text-center text-gray-800 bg-white shadow-xl lg:max-w-3xl rounded-3xl lg:p-12">
-          
-          <img class="w-16 md:w-32 lg:w-48 flex justify-start" src={img} alt="Image not loading"/> 
-
-          <h3 class="text-2xl">Please Verify Email</h3>
+      <div className="flex items-center justify-center min-h-screen p-5  min-w-screen">
+        <div className="">
+          <img
+            className="w-16 md:w-32 lg:w-48 flex justify-start "
+            src={img}
+            alt="Image not loading"
+          />
+        </div>
+        <div className=" chat chat-start" style={{"margin-bottom": "15rem  ", "background-color": "#2a2d35"}}>
+          <div className="chat-bubble " style={{"background-color": "#2a2d35"}}>
+            <h3 className="text-2xl">
+              An email has been sent to your email address.
+            </h3>
+            <br />
+            <h3 className="text-xl">
+              Please check your mailbox to verify email!
+            </h3>
+            <br />
+            <h3 className="text-xl">
+              Note that ucalgary email verification may take up to two hours.
+            </h3>
+          </div>
         </div>
       </div>
     );
   } else {
     return (
-
-      <div class="flex items-center justify-center min-h-screen p-5  min-w-screen">  
-        <div div class="max-w-xl p-8 text-center text-gray-800 bg-white shadow-xl lg:max-w-3xl rounded-3xl lg:p-12">
-          
-          <img class="w-16 md:w-32 lg:w-48 flex justify-start" src={img} alt="Image not loading"/> 
-
-          <h3 class="text-2xl">Verifying Email...</h3>
-        </div>        
+      <div className="flex items-center justify-center min-h-screen p-5  min-w-screen">
+        <div className="">
+          <img
+            className="w-16 md:w-32 lg:w-48 flex justify-start "
+            src={img}
+            alt="Image not loading"
+          />
+        </div>
+        <div className=" chat chat-start" style={{"margin-bottom": "15rem  ", "background-color": "#2a2d35"}}>
+          <div className="chat-bubble " style={{"background-color": "#2a2d35"}}>
+            <h3 className="text-2xl">
+              Verifying email...
+            </h3>
+          </div>
+        </div>
       </div>
-
     );
   }
 }
