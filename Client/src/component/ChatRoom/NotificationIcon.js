@@ -11,7 +11,7 @@ const NotificationIcon = ({ currentContact, index }) => {
             <div className="relative">
                 
                 {currentContact && currentContact[index] && currentContact[index].unreadCount &&
-                    <span className="inline-block bg-red-500 group-focus:bg-white text-white text-sm font-semibold rounded-full px-2 py-1">
+                    <span className="inline-block bg-red-700 group-focus:bg-white text-white text-sm font-semibold rounded-full px-2 py-1">
                         {currentContact[index].unreadCount}
                     </span>
                 }
