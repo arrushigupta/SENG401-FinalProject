@@ -29,11 +29,12 @@ export default NotificationIcon;
 
 const Container = styled.div`
 .notification-container {
-    margin-left: auto;
-    margin-right: 50px;
+    
+    margin-right: 0px;
     position: relative;
-    top: -35px;
-    right: -200px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
   }
   
   .notification-icon {

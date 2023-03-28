@@ -104,10 +104,12 @@ function Contacts({ contacts, currentUser, changeChat }) {
                 return (
                   <div
                     key={contact._id}
-                    className={`contact ${index === currentSelected ? "selected" : ""
+                    className={`relative contact ${index === currentSelected ? "selected" : ""
                       }`}
                     onClick={() => changeCurrentChat(index, contact)}
                   >
+                    {currentContact && currentContact[index] && currentContact[index].unreadCount &&
+                        <NotificationIcon className="absolute top-1 left-1" currentContact={currentContact} index={index}> </NotificationIcon>}
                     <div className="avatar">
                       <img
                         src={`data:image/svg+xml;base64,${contact.avatarImage}`}
@@ -116,9 +118,9 @@ function Contacts({ contacts, currentUser, changeChat }) {
                     </div>
                     <div className="username display:flex align-items:left">
                       <h3 className="username-name margin-right:250px">{contact.username}</h3>
-                      {currentContact && currentContact[index] && currentContact[index].unreadCount &&
-                        <NotificationIcon currentContact={currentContact} index={index}> </NotificationIcon>}
+                      
                     </div>
+                    
                   </div>
                 );
               })}
