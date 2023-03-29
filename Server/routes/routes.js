@@ -138,7 +138,7 @@ router.post("/register", async (req, res) => {
       const dataToSave = await data.save();
 
       // will need to be changed to site's url
-      const url = `http://localhost:3000/verifyEmail?user=${req.body.username}`;
+      const url = `https://dinos-marketplace-react.uw.r.appspot.com/verifyEmail?user=${req.body.username}`;
       const msg = {
         to: req.body.email, // to the user's email
         from: "dinos.marketplace401@gmail.com", // Change to your verified sender
