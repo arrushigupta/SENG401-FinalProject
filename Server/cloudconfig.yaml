@@ -1,0 +1,8 @@
+steps:
+  # Step 1: Install Required Dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install', '/workspace/Server']
+
+  # Step 2: Build the Application
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run']
