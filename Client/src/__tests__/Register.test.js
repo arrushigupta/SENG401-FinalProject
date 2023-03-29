@@ -2,10 +2,24 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import SignUp from "../component/Login/SignUp.js";
 import { MemoryRouter } from "react-router-dom";
-import { router } from "../../../Server/routes/routes.js";
 import { DINOSPost } from "../scripts/backend-functions.js";
-import { registerRoute } from "../utils/Routes.js";
 
+// const mockRouter = {
+//     get: jest.fn(),
+//     post: jest.fn(),
+//     put: jest.fn(),
+//     delete: jest.fn(),
+//     use: jest.fn(),
+//     listen: jest.fn(),
+// };
+
+// const mockExpress = jest.fn(() => mockRouter);
+
+// module.exports = mockExpress;
+
+// jest.mock('express');
+// const express = require('express');
+// const router = express.Router();
 
 describe("SignUp", () => {
 
@@ -48,6 +62,5 @@ describe("SignUp", () => {
         fireEvent.change(passwordInput, { target: { value: "testpassword" } });
         fireEvent.change(confirmPasswordInput, { target: { value: "testpassword" } });
         fireEvent.click(signupButton);
-
     });
 });
