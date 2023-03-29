@@ -73,11 +73,9 @@ export default function SignUp() {
         email: signupState.email,
         password: signupState.password,
       }).then((response) => {
-
         if (response.status === "success") {
           setUserID(signupState.username);
           setSignupState("");
-
           notify("success");
           setTimeout(() => {
             navigate("/");
