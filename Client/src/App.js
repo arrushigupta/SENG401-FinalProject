@@ -1,3 +1,4 @@
+import "./App.css";
 import { useState } from "react";
 import SignupPage from "./pages/SignUp";
 import LoginPage from "./pages/Login";
