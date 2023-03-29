@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test login page exists 1`] = `
+<form
+  className="mt-8 space-y-6"
+  onSubmit={[Function]}
+>
+  <div
+    className="Toastify"
+  />
+  <div
+    className="-space-y-px"
+  >
+    <div
+      className="my-5"
+    >
+      <label
+        className="sr-only"
+        htmlFor="email"
+      >
+        Email address
+      </label>
+      <input
+        className="rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-smundefined"
+        id="email"
+        name="email"
+        onChange={[Function]}
+        placeholder="Email address"
+        required={true}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="my-5"
+    >
+      <label
+        className="sr-only"
+        htmlFor="password"
+      >
+        Password
+      </label>
+      <input
+        className="rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-smundefined"
+        id="password"
+        name="password"
+        onChange={[Function]}
+        placeholder="Password"
+        required={true}
+        type="password"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    className="flex items-center justify-between "
+  >
+    <div
+      className="flex items-center"
+    >
+      <input
+        className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+        id="remember-me"
+        name="remember-me"
+        type="checkbox"
+      />
+      <label
+        className="ml-2 block text-sm text-gray-900"
+        htmlFor="remember-me"
+      >
+        Remember me
+      </label>
+    </div>
+    <div
+      className="text-sm"
+    >
+      <a
+        className="font-medium text-red-600 hover:text-red-500"
+        href="#"
+      >
+        Forgot your password?
+      </a>
+    </div>
+  </div>
+  <div>
+    <button
+      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-10"
+      onSubmit={[Function]}
+      type="submit"
+    >
+      Login
+    </button>
+  </div>
+</form>
+`;

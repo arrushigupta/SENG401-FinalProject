@@ -1,4 +1,4 @@
-export const host = "http://localhost:6969";
+export const host = "https://dinosmarketplace-urkizklnfa-wl.a.run.app/";
 export const registerRoute = `${host}/api/register`;
 export const loginRoute = `${host}/api/login`;
 export const setAvatarRoute = `${host}/api/setAvatar`;
@@ -15,4 +15,4 @@ export const getSpecificProductNameRoute = `${host}/api/getSpecificProducts/name
 export const getSpecificProductCategoryRoute = `${host}/api/getSpecificProducts/category/`;
 export const getTwoSpecificProductsCategoryRoute = `${host}/api/getSpecificProductsTwo/category/`;
 export const deleteProductRoute = `${host}/api/deleteProduct/`;
-export const updateInfoRoute = `${host}/api/updateInfo/`
+export const updateInfoRoute = `${host}/api/updateInfo/`;

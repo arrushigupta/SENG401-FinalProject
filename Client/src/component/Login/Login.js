@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { loginFields } from "../../constants/formField";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
@@ -9,7 +9,7 @@ import { DINOSPost } from "../../scripts/backend-functions";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+
 import { loginRoute } from "../../utils/Routes";
 
 const fields = loginFields;
@@ -74,7 +74,6 @@ export default function Login() {
         email: loginState.email,
         password: loginState.password,
       }).then((response) => {
-
         if (response.status === "success") {
           setUserName(loginState.username);
           setLoginState("");
