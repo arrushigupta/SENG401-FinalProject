@@ -1,4 +1,4 @@
-export const host = "http://localhost:6969";
+export const host = "https://dinosmarketplace-urkizklnfa-wl.a.run.app";
 export const registerRoute = `${host}/api/register`;
 export const loginRoute = `${host}/api/login`;
 export const setAvatarRoute = `${host}/api/setAvatar`;
