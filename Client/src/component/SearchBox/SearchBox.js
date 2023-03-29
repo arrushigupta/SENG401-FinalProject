@@ -21,8 +21,26 @@ export default function SearchBox({
   };
 
   return (
-    <div className="flex">
-      <div className="flex space-x-1">
+    <div className="flex justify-center items-center">
+      <div className="flex space-x-4">
+        <select
+          value={searchCategory}
+          onChange={handleCategory}
+          name="category"
+          id="category"
+          className="form-select block w-1/2 my-2 border rounded"
+        >
+          <option value="All">All</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Textbooks">Textbooks</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Vehicles">Vehicles</option>
+          <option value="Services">Services</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Events">Events</option>
+          <option value="Other">Other</option>
+        </select>
         <input
           type="text"
           value={searchQuery}
@@ -30,27 +48,7 @@ export default function SearchBox({
           className="block w-full px-4 py-2 text-black-700 bg-white border rounded-full focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
           placeholder="Search Product..."
         />
-        <label className="w-1/2 justify-start flex-cols items-start">
-          Category
-          <select
-            value={searchCategory}
-            onChange={handleCategory}
-            name="category"
-            id="category"
-            className="form-select block w-full mt-1 border rounded"
-          >
-            <option value="All">All</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Textbooks">Textbooks</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Vehicles">Vehicles</option>
-            <option value="Services">Services</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Events">Events</option>
-            <option value="Other">Other</option>
-          </select>
-        </label>
+
         <button
           onClick={handleSubmit}
           className="px-4 text-white bg-red-600 rounded-full "
