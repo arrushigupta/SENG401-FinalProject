@@ -1,10 +1,10 @@
-# Dinos Marketplace
+# Dinos Marketplace 🦖
 
-Welcome to `Dinos Marketplace`! This README.md file provides you with instructions on how to set up, run, and access the application, as well as an overview of the project's design.
+Welcome to `Dinos Marketplace 🦖`! This README.md file provides you with instructions on how to set up, run, and access the application, as well as an overview of the project's design.
 
 ## URL to application
 
-[Dinos Marketplace](https://dinos-marketplace-react.uw.r.appspot.com/)
+[Dinos Marketplace 🦖](https://dinos-marketplace-react.uw.r.appspot.com/)
 
 ## Table of Contents
 
@@ -67,7 +67,7 @@ sh run.sh
 
 ## Application URL
 
-[Dinos Marketplace](https://dinos-marketplace-react.uw.r.appspot.com/)
+[Dinos Marketplace 🦖](https://dinos-marketplace-react.uw.r.appspot.com/)
 
 ## Design of the Project
 
