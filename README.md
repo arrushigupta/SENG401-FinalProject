@@ -1,4 +1,4 @@
-# MyReactApp
+# Dinos Marketplace
 
 Welcome to `Dinos Marketplace`! This README.md file provides you with instructions on how to set up, run, and access the application, as well as an overview of the project's design.
 
