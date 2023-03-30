@@ -32,6 +32,14 @@ Follow the instructions below to set up and run the application on your local ma
 1. Clone the repository:
 
 ```bash
+git clone https://github.com/arrushigupta/SENG401-FinalProject.git
+```
+
+### Running the Application
+
+1. Installation & Run the application:
+
+```bash
 cd Client
 npm install
 npm start
@@ -42,6 +50,18 @@ cd Server
 npm install
 sh run.sh
 ```
+
+## Application URL
+
+[Dinos Marketplace](https://dinos-marketplace-react.uw.r.appspot.com/)
+
+## Design of the Project
+
+1. Data privacy: Data is kept private by encrypting sensitive user information
+2. Ease of use: The application is very easy to use, with an intuitive GUI and helpful text prompts throughout the application. The app requires minimal training, so anyone can use it.
+3. Aesthetic: GUI interface was designed using tailwind, which is a css library specific to the React frontend framework. This allowed for components with similar elements throughout the application
+4. Accessibility: our application can be accessed from anywhere in the world, with minimal downtime. This is possible since we are hosting our database and server on the cloud.
+5. Two factor authentication: Email verification in order to ensure users are creating accounts with their own emails, and users are who they say they are.
 
 ### Contributing
 
