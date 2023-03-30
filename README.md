@@ -77,6 +77,11 @@ sh run.sh
 4. Accessibility: our application can be accessed from anywhere in the world, with minimal downtime. This is possible since we are hosting our database and server on the cloud.
 5. Two factor authentication: Email verification in order to ensure users are creating accounts with their own emails, and users are who they say they are.
 
+### Selenium Testing
+1. Download Dino Marketplace Test.side from Tests 
+2. Open Selenium in browser and import the downloaded file
+3. Run all test cases to test GUI
+
 ### Contributing
 
 Pull requests are welcome. For major changes, please open an issue first

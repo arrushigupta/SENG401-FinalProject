@@ -83,7 +83,7 @@ export default function ProductList({ chooseMessage, productState }) {
     axios
       .delete(deleteProductRoute + `${_id}`)
       .then(() => {
-        alert("Product was deleted successfully");
+        // alert("Product was deleted successfully");
         setDeletedProductId(_id);
       })
       .catch((error) => {
