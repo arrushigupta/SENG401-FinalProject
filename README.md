@@ -41,20 +41,23 @@ git clone https://github.com/arrushigupta/SENG401-FinalProject.git
 
 How to run it locally:
 
+run
+
 ```bash
 cd Client
 npm install
 npm start
 ```
 
-create sendgrid.env file in the Server folder
-put
+create sendgrid.env file in the Server folder, then put
 
 ```bash
 export SENDGRID_API_KEY='{YOUR_API_KEY}'
 ```
 
 in the sendgrid.env file.
+
+run
 
 ```bash
 cd Server
