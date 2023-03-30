@@ -2,7 +2,7 @@
 
 Welcome to `Dinos Marketplace`! This README.md file provides you with instructions on how to set up, run, and access the application, as well as an overview of the project's design.
 
-## URL
+## URL to application
 
 [Dinos Marketplace](https://dinos-marketplace-react.uw.r.appspot.com/)
 
@@ -39,11 +39,22 @@ git clone https://github.com/arrushigupta/SENG401-FinalProject.git
 
 1. Installation & Run the application:
 
+How to run it locally:
+
 ```bash
 cd Client
 npm install
 npm start
 ```
+
+create sendgrid.env file in the Server folder
+put
+
+```bash
+export SENDGRID_API_KEY='{YOUR_API_KEY}'
+```
+
+in the sendgrid.env file.
 
 ```bash
 cd Server
